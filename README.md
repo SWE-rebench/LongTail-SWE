@@ -7,6 +7,7 @@ Kotlin, Lua, OCaml, R, Scala, Swift).
 | Path | Content |
 | --- | --- |
 | `data/longtail_tasks.json` | The 237 final tasks (statement, reference patch, test patch, F2P/P2P, install/test commands, log parser). |
+| `LICENSE`, `data/LICENSE.md`, `LICENSE-CC-BY-4.0.txt` | MIT for code; CC BY 4.0 for original dataset contributions; third-party materials keep their licenses. |
 | `base_images.yaml`, `base_dockerfiles/` | The 29 base images used by the tasks plus the 5 intermediate images they are built from (34 build steps in total). |
 | `combine.Dockerfile.j2` | Instance image template: clone at the base commit, run the install commands. |
 | `scripts/build_base_images.py` | Builds base images in dependency order. |
@@ -87,7 +88,23 @@ and are left unchanged.
 ## Data notes
 
 `data/longtail_tasks.json` keeps only the fields needed to build and evaluate the tasks. Internal
-image names, PR descriptions, PR authors, and LLM annotation metadata were removed; `pr_url` is
-kept for provenance. Problem statements may contain `[HIDDEN]` spans (redactions of solution-revealing
-text) and the repaired `### Additional contract requirements` section. Each task keeps the license
-of its source repository (`license`).
+image names, PR descriptions, PR authors, and annotation metadata were removed; `pr_url` is
+kept for provenance. `problem_statement` is the statement the solver sees. It equals
+`problem_statement_base` (the statement after the initial audit, possibly containing `[HIDDEN]` redactions of
+implementation hints) plus, for the 202 tasks repaired with an addendum, the `### Additional contract requirements`
+section whose text is `contract_addendum` (empty for the other 35). `license` is the license of the source repository.
+
+## Relation to the paper
+
+This repository contains the 237-task Longtail-SWE benchmark, its executable environments, the evaluation
+protocol, and the prompts, schemas, and settings of the auditor, solver, judge, and repairer. The paper's
+supplementary archive additionally contains material that is **not** part of this repository: the 296-task
+companion set, the raw issue texts and original tests, agent trajectories, audit and repair histories (the
+intermediate task revisions), and the data-collection code. The scaffold that executes the agents and the repair
+validator are also not included.
+
+## License
+
+Code, Dockerfiles, templates, and prompts: MIT (`LICENSE`). Original dataset contributions: CC BY 4.0
+(`LICENSE-CC-BY-4.0.txt`). Third-party materials (issue text, reference patches, original tests, repository
+content) remain under the license of their source repository; see `data/LICENSE.md`.

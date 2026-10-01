@@ -104,3 +104,16 @@ def test_prompts_have_no_agent_runtime_instructions():
             assert marker not in text, marker
     assert "issue" in solver_task_prompt("issue")
     assert "install_config.json" in auditor_system_prompt()
+
+
+def test_statement_split_and_licenses():
+    heading = "### Additional contract requirements"
+    allowed = {"MIT", "Apache-2.0", "BSD-2-Clause", "BSD-3-Clause", "Unlicense"}
+    for t in TASKS:
+        assert t["license"] in allowed
+        if t["contract_addendum"]:
+            assert heading in t["problem_statement"]
+            assert t["problem_statement"].endswith(t["contract_addendum"])
+            assert t["problem_statement"].startswith(t["problem_statement_base"])
+        else:
+            assert t["problem_statement"] == t["problem_statement_base"]
