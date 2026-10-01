@@ -1,0 +1,22 @@
+# Pinned RabbitMQ framework source plus common, versioned build tools.
+# Project dependencies remain in the per-row audited install contract.
+FROM erlang_base:v2026-08-18-erlang-otp27-rebench
+
+USER root
+ARG RMQ_SERVER_SHA
+RUN test -n "$RMQ_SERVER_SHA" \
+ && apt-get update \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends zip p7zip-full \
+ && rm -rf /var/lib/apt/lists/* \
+ && ln -sf /usr/bin/make /usr/local/bin/gmake \
+ && git init -q /opt/rabbitmq-server \
+ && git -C /opt/rabbitmq-server remote add origin https://github.com/amazon-mq/upstream-to-rabbitmq-server.git \
+ && git -C /opt/rabbitmq-server fetch -q --depth 1 origin "$RMQ_SERVER_SHA" \
+ && git -C /opt/rabbitmq-server checkout -q --detach "$RMQ_SERVER_SHA" \
+ && test "$(git -C /opt/rabbitmq-server rev-parse HEAD)" = "$RMQ_SERVER_SHA" \
+ && git config --system --add safe.directory /opt/rabbitmq-server \
+ && printf '%s\n' "$RMQ_SERVER_SHA" > /opt/rebench-rmq-server-commit \
+ && chmod -R a+rX /opt/rabbitmq-server /opt/rebench-rmq-server-commit
+
+ENV REBENCH_RMQ_SERVER_ROOT=/opt/rabbitmq-server
+WORKDIR /workspace

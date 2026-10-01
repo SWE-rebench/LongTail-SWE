@@ -1,0 +1,20 @@
+FROM --platform=linux/amd64 elixir_base:v2026-08-14-elixir-1.18.4-otp27-postgres18-rebench AS prefetch
+
+ENV npm_config_cache=/workspace/.cache/npm
+COPY ev_cache_manifest.json /opt/rebench-ev-cache-manifest.json
+COPY prefetch_ev_cache.py /usr/local/bin/prefetch_ev_cache.py
+RUN python3 /usr/local/bin/prefetch_ev_cache.py && \
+    test "$(python3 -c 'import json; print(len(json.load(open("/opt/rebench-ev-cache/prefetch_report.json"))))')" = 15 && \
+    test -d /opt/rebench-rustler/_build/test/lib/rustler && \
+    chmod -R a+rX /workspace/.hex /workspace/.cache /opt/rebench-ev-cache /opt/rebench-rustler
+
+FROM --platform=linux/amd64 elixir_base:v2026-08-14-elixir-1.18.4-otp27-postgres18-rebench
+
+ENV npm_config_cache=/workspace/.cache/npm
+COPY --from=prefetch /workspace/.hex /workspace/.hex
+COPY --from=prefetch /workspace/.cache /workspace/.cache
+COPY --from=prefetch /opt/rebench-ev-cache /opt/rebench-ev-cache
+COPY --from=prefetch /opt/rebench-rustler /opt/rebench-rustler
+RUN test -f /opt/rebench-ev-cache/prefetch_report.json && \
+    test -d /opt/rebench-rustler/_build/test/lib/rustler && \
+    chmod -R a+rX /workspace/.hex /workspace/.cache /opt/rebench-ev-cache /opt/rebench-rustler

@@ -1,0 +1,52 @@
+# Model and loop settings of the solver-judge-repair pipeline.
+# Model names are the public names used in the paper; endpoints and keys are not included.
+# Prompts are in ../prompts (rendered by longtail/prompts.py).
+
+solver:
+  # Repair loop (Appendix A.7): Kimi K3 with the judge/repairer configuration below,
+  # GPT 5.6 Terra (high), GPT 5.6 Luna (xhigh), GPT 5.6 Sol (high).
+  # Final evaluation (Section 5.1): three attempts per task for each of
+  # GPT 5.6 Sol (high), GPT 5.6 Luna (xhigh), Kimi K3 (max), DeepSeek V4 Flash (high),
+  # GLM5.3-Flash (max), Qwen 3.8 27B (xhigh), Qwen 3.6 27B (thinking).
+  temperature: 1.0
+  prompts:
+    system: prompts/solver/system.j2
+    task: prompts/solver/task.j2
+
+auditor:
+  model: Kimi K3                  # same configuration as the judge and repairer (Appendix A.7)
+  temperature: 1.0
+  top_p: 1.0
+  reasoning_effort: high
+  context_tokens: 1048576
+  prompts:
+    system: prompts/auditor/system.j2
+
+judge:
+  model: Kimi K3
+  temperature: 1.0
+  top_p: 1.0
+  reasoning_effort: high
+  context_tokens: 1048576
+  max_steps: 120
+  extraction_attempts: 2          # initial attempt + 1 targeted retry
+  prompts:
+    system: prompts/worker/system.j2
+    task: prompts/judge/task.j2
+    retry: prompts/judge/retry.j2
+
+repairer:
+  model: Kimi K3
+  temperature: 1.0
+  top_p: 1.0
+  reasoning_effort: high
+  context_tokens: 1048576
+  max_steps: 180
+  validity_attempts_per_cycle: 3  # initial attempt + 2 retries after failed validation
+  prompts:
+    system: prompts/worker/system.j2
+    task: prompts/repairer/task.j2
+    retry: prompts/repairer/retry.j2
+
+loop:
+  repair_cycles_per_set: 5        # rounds are run in sets of five (Section 3.4)

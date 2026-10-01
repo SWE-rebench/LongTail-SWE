@@ -1,0 +1,54 @@
+# Kotlin audit-remediation image for rows that require Android host tooling,
+# Chrome, JDK 17, Node 22, or the Android native toolchain.
+FROM --platform=linux/amd64 docker.io/library/eclipse-temurin:17-jdk-jammy AS temurin17
+FROM --platform=linux/amd64 docker.io/library/node:22-bookworm AS node22
+FROM --platform=linux/amd64 dart_base:v2026-07-02-dart-rebench AS android_browser_base
+
+FROM android_browser_base
+
+USER root
+# Optional build-time proxy: --build-arg http_proxy=... --build-arg https_proxy=...
+ARG http_proxy=
+ARG https_proxy=
+
+# Keep JDK 21 as the inherited default. Rows that require Java 17 select this
+# exact path in their own install_config rather than changing other rows.
+COPY --from=temurin17 /opt/java/openjdk /opt/java/jdk-17
+
+# Node is needed by the React-Native row. Flutter and Android remain under
+# /sdks and /opt, so the official Node /usr/local tree does not replace them.
+COPY --from=node22 /usr/local /usr/local
+
+ENV JAVA_17_HOME=/opt/java/jdk-17 \
+    NODE_22_HOME=/usr/local \
+    PATH=/usr/local/bin:$PATH
+
+COPY install_android_packages.py /root/install_android_packages.py
+RUN python3 /root/install_android_packages.py && \
+    rm /root/install_android_packages.py
+
+# Python's ZIP reader intentionally does not restore Unix mode bits. Restore
+# execution only for tools from the four newly expanded command directories.
+RUN find "$ANDROID_SDK_ROOT/build-tools/34.0.0" \
+         "$ANDROID_SDK_ROOT/build-tools/35.0.0" \
+         "$ANDROID_SDK_ROOT/ndk/28.1.13356709" \
+         "$ANDROID_SDK_ROOT/cmake/3.22.1" \
+         -type f -exec chmod a+rx {} +
+
+RUN set -eux; \
+    java -version; \
+    "$JAVA_17_HOME/bin/java" -version; \
+    node --version; \
+    npm --version; \
+    corepack --version; \
+    google-chrome --version; \
+    test -f "$ANDROID_SDK_ROOT/platforms/android-34/android.jar"; \
+    test -f "$ANDROID_SDK_ROOT/platforms/android-35/android.jar"; \
+    test -f "$ANDROID_SDK_ROOT/platforms/android-36/android.jar"; \
+    test -f "$ANDROID_SDK_ROOT/platforms/android-37/android.jar"; \
+    test -x "$ANDROID_SDK_ROOT/ndk/28.1.13356709/ndk-build"; \
+    test -x "$ANDROID_SDK_ROOT/cmake/3.22.1/bin/cmake"; \
+    test -x "$ANDROID_SDK_ROOT/cmake/3.22.1/bin/ninja"; \
+    test -x "$ANDROID_SDK_ROOT/platform-tools/adb"
+
+WORKDIR /workspace

@@ -1,0 +1,28 @@
+# Versioned OTP-28 cohort for the audited Asobi rows whose dependency declares
+# OTP 28. It supplies only the runtime and normal Erlang build tools; projects
+# remain responsible for their own dependencies.
+FROM elixir_base:v2026-07-02-elixir-1.18.4-otp27-rebench AS rebar_source
+FROM --platform=linux/amd64 docker.io/library/erlang:28
+
+USER root
+
+# Use the already verified standalone rebar3 3.26.0 rather than apt's OTP-27
+# dependency chain. Git and compiler tools are required to build normal
+# repository dependencies; no service or alternate language runtime is added.
+COPY --from=rebar_source /usr/local/bin/rebar3 /usr/local/bin/rebar3
+RUN apt-get update \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends git make gcc g++ ca-certificates \
+ && rm -rf /var/lib/apt/lists/* \
+ && test "$(erl -noshell -eval 'io:format("~s", [erlang:system_info(otp_release)]), halt().')" = "28" \
+ && erl -noshell -eval 'code:lib_dir(eunit), code:lib_dir(common_test), halt().' \
+ && rebar3 --version \
+ && if ! getent passwd nonroot >/dev/null; then useradd --create-home --uid 1000 --shell /bin/bash nonroot; fi \
+ && mkdir -p /workspace/.cache/rebar3 /workspace/.cache/erl \
+ && chmod -R 777 /workspace
+
+ENV REBAR_CACHE_DIR=/workspace/.cache/rebar3 \
+    XDG_CACHE_HOME=/workspace/.cache \
+    XDG_CONFIG_HOME=/workspace/.config \
+    XDG_DATA_HOME=/workspace/.local/share
+
+WORKDIR /workspace

@@ -1,0 +1,203 @@
+# Haskell build container for Longtail-SWE (Linux/amd64).
+#
+# The upstream haskell:9.8.4 image is Bullseye (glibc 2.31), whereas the
+# agent action-server binary requires GLIBC_2.35.  Use Bookworm explicitly
+# and install the checksum-pinned Debian 12 GHC/Cabal bindists instead.
+FROM --platform=linux/amd64 docker.io/library/rust:1.85.1-bookworm@sha256:bf7d87666c4da6eace19e06d21bc4859c6e2a5c97a21ac273b0e082112753cf0 AS rust_toolchain
+
+FROM --platform=linux/amd64 docker.io/library/debian:bookworm-slim@sha256:362e64223cc0da95422b3b13c045186fc0a81250e765d31c025fbddf257f6143 AS haskell_base
+
+ARG DEBIAN_FRONTEND=noninteractive
+ARG GHC_VERSION=9.8.4
+ARG GHC_BINDIST_PLATFORM=deb12
+ARG GHC_BINDIST_SHA256=b50545b54934068a569225e3dde267a8b5aab66449330d63e02a8cf28972375e
+ARG CABAL_VERSION=3.14.1.1
+ARG CABAL_BINDIST_SHA256=73a463306c771e18ca22c0a9469176ffab0138ec5925adb5364ef47174e1adc5
+ARG STACK_VERSION=3.3.1
+ARG STACK_BINDIST_SHA256=88d7e517342c125b0a098d9d578fe53e590618ae4b2427283a27408a1ebd06d8
+ARG NIX_VERSION=2.35.1
+ARG NIX_INSTALLER_SHA256=34e0ef63ec1f3e552e15069660afd9a0a23f69009e340c33067595252888286c
+ARG BLST_VERSION=0.3.16
+ARG BLST_SOURCE_SHA256=e04805b7d6ef9e1d89b7f511a5b86136c57b455d97924d7324da2305a864673f
+ARG IOG_LIBSODIUM_COMMIT=dbb48cce5429cb6585c9034f002568964f1ce567
+ARG IOG_LIBSODIUM_SOURCE_SHA256=e4f29ae3c16037e484bb69e3fa22a5565c42adf497f8f88e61ff8d9486ab863e
+ENV TZ=Etc/UTC \
+    LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8 \
+    CARGO_HOME=/usr/local/cargo \
+    RUSTUP_HOME=/usr/local/rustup \
+    LLVM_CONFIG=/usr/bin/llvm-config-15 \
+    LIBCLANG_PATH=/usr/lib/llvm-15/lib
+
+# Cabal is the dominant project format in the selected batch.  Stack and Hpack
+# cover the remaining common project layouts.  The native and Clang toolchain
+# supports the many C/FFI and hs-bindgen rows without project-local bootstraps.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    autoconf \
+    automake \
+    autotools-dev \
+    bash \
+    build-essential \
+    ca-certificates \
+    clang-15 \
+    cmake \
+    curl \
+    doxygen \
+    file \
+    git \
+    gnupg \
+    hpack \
+    libclang-15-dev \
+    libffi-dev \
+    libgmp-dev \
+    libicu-dev \
+    liblmdb-dev \
+    libncurses-dev \
+    libnuma-dev \
+    libpq-dev \
+    libsecp256k1-dev \
+    libsqlite3-dev \
+    libssl-dev \
+    libtinfo-dev \
+    libtool \
+    liburing-dev \
+    libzstd-dev \
+    llvm-15-dev \
+    make \
+    ninja-build \
+    perl \
+    pkg-config \
+    python-is-python3 \
+    python3 \
+    python3-pip \
+    unzip \
+    wget \
+    xz-utils \
+    zip \
+    z3 \
+    zlib1g-dev \
+    && ln -s /usr/bin/clang-15 /usr/local/bin/clang \
+    && ln -s /usr/bin/clang++-15 /usr/local/bin/clang++ \
+    && ln -s /usr/bin/llvm-config-15 /usr/local/bin/llvm-config \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --from=rust_toolchain /usr/local/cargo /usr/local/cargo
+COPY --from=rust_toolchain /usr/local/rustup /usr/local/rustup
+
+RUN curl --proto '=https' --tlsv1.2 -fsSL \
+        "https://github.com/supranational/blst/archive/refs/tags/v${BLST_VERSION}.tar.gz" \
+        -o /tmp/blst.tar.gz \
+    && echo "${BLST_SOURCE_SHA256}  /tmp/blst.tar.gz" | sha256sum -c - \
+    && mkdir -p /tmp/blst \
+    && tar -xzf /tmp/blst.tar.gz -C /tmp/blst --strip-components=1 \
+    && cd /tmp/blst \
+    && ./build.sh \
+    && install -m 0644 libblst.a /usr/local/lib/libblst.a \
+    && install -m 0644 bindings/blst.h bindings/blst_aux.h /usr/local/include/ \
+    && install -d -m 0755 /usr/local/lib/pkgconfig \
+    && printf '%s\n' \
+        'prefix=/usr/local' \
+        'exec_prefix=${prefix}' \
+        'libdir=${exec_prefix}/lib' \
+        'includedir=${prefix}/include' \
+        '' \
+        'Name: libblst' \
+        'Description: Multilingual BLS12-381 signature library' \
+        "Version: ${BLST_VERSION}" \
+        'Cflags: -I${includedir}' \
+        'Libs: -L${libdir} -lblst' \
+        > /usr/local/lib/pkgconfig/libblst.pc \
+    && rm -rf /tmp/blst /tmp/blst.tar.gz
+
+RUN curl --proto '=https' --tlsv1.2 -fsSL \
+        "https://github.com/IntersectMBO/libsodium/archive/${IOG_LIBSODIUM_COMMIT}.tar.gz" \
+        -o /tmp/libsodium.tar.gz \
+    && echo "${IOG_LIBSODIUM_SOURCE_SHA256}  /tmp/libsodium.tar.gz" | sha256sum -c - \
+    && mkdir -p /tmp/libsodium \
+    && tar -xzf /tmp/libsodium.tar.gz -C /tmp/libsodium --strip-components=1 \
+    && cd /tmp/libsodium \
+    && ./autogen.sh \
+    && cp /usr/share/misc/config.guess /usr/share/misc/config.sub build-aux/ \
+    && chmod +x build-aux/config.guess build-aux/config.sub \
+    && ./configure --prefix=/usr/local \
+    && make -j"$(nproc)" \
+    && make install \
+    && ldconfig \
+    && rm -rf /tmp/libsodium /tmp/libsodium.tar.gz
+
+# The official Debian 12 bindists preserve the compiler/tool versions selected
+# for this batch while keeping the action-server-compatible glibc 2.36 runtime.
+RUN curl --proto '=https' --tlsv1.2 -fsSL \
+        "https://downloads.haskell.org/~ghc/${GHC_VERSION}/ghc-${GHC_VERSION}-x86_64-${GHC_BINDIST_PLATFORM}-linux.tar.xz" \
+        -o /tmp/ghc.tar.xz \
+    && echo "${GHC_BINDIST_SHA256}  /tmp/ghc.tar.xz" | sha256sum -c - \
+    && mkdir -p /tmp/ghc-bindist \
+    && tar -xJf /tmp/ghc.tar.xz -C /tmp/ghc-bindist --strip-components=1 \
+    && cd /tmp/ghc-bindist \
+    && ./configure --prefix="/opt/ghc/${GHC_VERSION}" \
+    && make install \
+    && rm -rf /tmp/ghc.tar.xz /tmp/ghc-bindist
+
+RUN curl --proto '=https' --tlsv1.2 -fsSL \
+        "https://downloads.haskell.org/~cabal/cabal-install-${CABAL_VERSION}/cabal-install-${CABAL_VERSION}-x86_64-linux-deb12.tar.xz" \
+        -o /tmp/cabal.tar.xz \
+    && echo "${CABAL_BINDIST_SHA256}  /tmp/cabal.tar.xz" | sha256sum -c - \
+    && tar -xJf /tmp/cabal.tar.xz -C /usr/local/bin cabal \
+    && rm -f /tmp/cabal.tar.xz \
+    && chmod +x /usr/local/bin/cabal
+
+RUN curl --proto '=https' --tlsv1.2 -fsSL \
+        "https://github.com/commercialhaskell/stack/releases/download/v${STACK_VERSION}/stack-${STACK_VERSION}-linux-x86_64.tar.gz" \
+        -o /tmp/stack.tar.gz \
+    && echo "${STACK_BINDIST_SHA256}  /tmp/stack.tar.gz" | sha256sum -c - \
+    && tar -xzf /tmp/stack.tar.gz -C /tmp \
+    && install -m 0755 "/tmp/stack-${STACK_VERSION}-linux-x86_64/stack" /usr/local/bin/stack \
+    && rm -rf /tmp/stack.tar.gz "/tmp/stack-${STACK_VERSION}-linux-x86_64"
+
+# Selected Cardano, hs-bindgen, and compiler-oriented projects use flakes.  Debian
+# Bullseye's Nix package predates flakes, so install the checksum-pinned official
+# Nix 2.35.1 distribution without a daemon or channel.  Project inputs and
+# compiler versions remain repository-controlled.
+RUN curl --proto '=https' --tlsv1.2 -fsSL \
+        "https://releases.nixos.org/nix/nix-${NIX_VERSION}/install" \
+        -o /tmp/install-nix \
+    && echo "${NIX_INSTALLER_SHA256}  /tmp/install-nix" | sha256sum -c - \
+    && install -d -m 0755 -o root -g root /nix \
+    && install -d -m 0755 /etc/nix \
+    && printf '%s\n' 'build-users-group =' > /etc/nix/nix.conf \
+    && sh /tmp/install-nix --no-daemon --yes --no-channel-add --no-modify-profile \
+    && rm -f /tmp/install-nix \
+    && printf '%s\n' \
+        'experimental-features = nix-command flakes' \
+        'sandbox = false' \
+        > /etc/nix/nix.conf
+
+WORKDIR /workspace
+
+# Keep tool caches in the workspace so the default root user and a runner-provided
+# non-root user can use project-local mounts without relying on image-layer state.
+ENV CABAL_DIR=/workspace/.cabal \
+    STACK_ROOT=/workspace/.stack \
+    XDG_CACHE_HOME=/workspace/.cache \
+    PKG_CONFIG_PATH=/usr/local/lib/pkgconfig \
+    PATH=/opt/ghc/${GHC_VERSION}/bin:/usr/local/cargo/bin:/root/.nix-profile/bin:${PATH}
+
+RUN mkdir -p "$CABAL_DIR" "$STACK_ROOT" "$XDG_CACHE_HOME" \
+    && ldd --version | head -n 1 | grep -F '2.36' \
+    && ghc --version \
+    && cabal --version \
+    && stack --version \
+    && hpack --version \
+    && nix --version \
+    && nix flake --help >/dev/null \
+    && clang --version | grep -F 'version 15.' \
+    && test "$(llvm-config --version)" = "15.0.6" \
+    && doxygen --version \
+    && rustc --version \
+    && cargo --version \
+    && z3 --version \
+    && pkg-config --atleast-version=0.3.14 libblst \
+    && pkg-config --exists 'lmdb >= 0.9' 'lmdb < 0.10' \
+    && pkg-config --exists liburing \
+    && test -f /usr/local/include/sodium/crypto_vrf_ietfdraft03.h \
+    && nm -D /usr/local/lib/libsodium.so | grep -F crypto_vrf_ietfdraft03_bytes

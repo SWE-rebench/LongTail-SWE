@@ -1,0 +1,93 @@
+# Composite Scala audit remediation image for the batch-001 environment retry.
+# It extends the proven Scala/sbt base rather than replacing its runtime.
+FROM --platform=linux/amd64 scala_base:v2026-06-29-scala-rebench AS scala_base
+FROM --platform=linux/amd64 docker.io/library/eclipse-temurin:21-jdk-jammy AS temurin21
+FROM --platform=linux/amd64 docker.io/library/eclipse-temurin:25-jdk-jammy AS temurin25
+FROM --platform=linux/amd64 docker.io/library/node:22-bookworm AS node22
+FROM --platform=linux/amd64 docker.io/library/rust:1.84-bookworm AS rust184
+
+FROM scala_base
+
+USER root
+ARG DEBIAN_FRONTEND=noninteractive
+
+# Keep the inherited JDK 17 default for broad Scala compatibility, and make
+# newer JDKs explicitly selectable by the audit agent per project requirement.
+COPY --from=temurin21 /opt/java/openjdk /opt/java/jdk-21
+COPY --from=temurin25 /opt/java/openjdk /opt/java/jdk-25
+
+# Node 22 brings node, npm, npx, corepack, and their matching lib tree without
+# replacing the inherited sbt/Scala binaries in /usr/local.
+COPY --from=node22 /usr/local /usr/local
+
+# Cargo/rustup are copied from the official Rust toolchain image.  The Ubuntu
+# 24.04 base has a newer glibc than the Bookworm toolchain image.
+COPY --from=rust184 /usr/local/cargo /usr/local/cargo
+COPY --from=rust184 /usr/local/rustup /usr/local/rustup
+
+# Common JVM/native/Scala.js support. PostgreSQL is intentionally a local
+# binary service only; this cannot substitute for Docker or external services.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        clang \
+        lld \
+        llvm \
+        protobuf-compiler \
+        python3 \
+        python3-pip \
+        python3-venv \
+        postgresql \
+        postgresql-client \
+        tmux \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV JAVA_21_HOME=/opt/java/jdk-21 \
+    JAVA_25_HOME=/opt/java/jdk-25 \
+    CARGO_HOME=/usr/local/cargo \
+    RUSTUP_HOME=/usr/local/rustup \
+    PATH=/usr/local/cargo/bin:/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
+    _JAVA_OPTIONS="-Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true" \
+    PGDATA=/workspace/.postgres \
+    PGHOST=127.0.0.1 \
+    PGPORT=5432
+
+# A project may start a local PostgreSQL instance without apt or systemd.
+RUN printf '%s\n' \
+      '#!/bin/sh' \
+      'set -eu' \
+      'pg_bin="$(pg_config --bindir)"' \
+      ': "${PGDATA:=/workspace/.postgres}"' \
+      ': "${PGHOST:=127.0.0.1}"' \
+      ': "${PGPORT:=5432}"' \
+      'mkdir -p "$PGDATA"' \
+      'if [ "$(id -u)" -eq 0 ]; then' \
+      '  chown -R postgres:postgres "$PGDATA"' \
+      '  exec runuser -u postgres -- env PGDATA="$PGDATA" PGHOST="$PGHOST" PGPORT="$PGPORT" "$0"' \
+      'fi' \
+      'if [ ! -f "$PGDATA/PG_VERSION" ]; then "$pg_bin/initdb" -D "$PGDATA" --auth=trust; fi' \
+      'if ! "$pg_bin/pg_ctl" -D "$PGDATA" status >/dev/null 2>&1; then "$pg_bin/pg_ctl" -D "$PGDATA" -l "$PGDATA/server.log" -o "-h $PGHOST -p $PGPORT" start; fi' \
+      > /usr/local/bin/rebench-start-postgres \
+    && chmod 0755 /usr/local/bin/rebench-start-postgres
+
+# Preserve writable cache roots. The build-time JVM cannot reach Maven in this
+# environment, so project-specific artifact retrieval remains an audit-time
+# concern rather than an image-build prerequisite.
+RUN mkdir -p /workspace/.ivy2 /workspace/.sbt /workspace/.cache/coursier \
+    && chmod -R a+rwx /workspace/.ivy2 /workspace/.sbt /workspace/.cache/coursier
+
+WORKDIR /workspace
+
+# Fail the image build early if its intended remediation capabilities are not
+# usable by the standard audit user and workspace layout.
+RUN set -eux; \
+    java -version; \
+    "$JAVA_21_HOME/bin/java" -version; \
+    "$JAVA_25_HOME/bin/java" -version; \
+    scala -version; \
+    sbt --script-version; \
+    node --version; npm --version; \
+    cargo --version; rustc --version; \
+    clang --version; protoc --version; \
+    python3 --version; \
+    pg_config --version; \
+    test -w /workspace/.cache/coursier

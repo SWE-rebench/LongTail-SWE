@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# Start an isolated, trust-authenticated PostgreSQL cluster for one benchmark
+# container.  It deliberately does not touch Debian's package cluster.
+set -euo pipefail
+
+version="${1:-${REBENCH_PG_VERSION:-}}"
+if [[ -z "$version" ]]; then
+  version="$(find /usr/lib/postgresql -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | sort -V | tail -n 1)"
+fi
+bin="/usr/lib/postgresql/${version}/bin"
+port="${REBENCH_PG_PORT:-5432}"
+data="${REBENCH_PGDATA:-/tmp/rebench-pg${version}-${port}/data}"
+socket="${REBENCH_PGSOCKET:-/tmp/rebench-pg${version}-${port}/socket}"
+log="${REBENCH_PGLOG:-${data}/postgres.log}"
+
+[[ -x "${bin}/initdb" && -x "${bin}/pg_ctl" ]] || {
+  echo "PostgreSQL ${version} is not installed at ${bin}" >&2
+  exit 2
+}
+id postgres >/dev/null 2>&1 || {
+  echo "the PostgreSQL package did not create the postgres user" >&2
+  exit 2
+}
+
+install -d -m 700 -o postgres -g postgres "${data}" "${socket}"
+if [[ ! -s "${data}/PG_VERSION" ]]; then
+  runuser -u postgres -- "${bin}/initdb" --no-locale --encoding=UTF8 \
+    --auth=trust --username=postgres --pgdata="${data}"
+fi
+
+if ! runuser -u postgres -- "${bin}/pg_ctl" --pgdata="${data}" status >/dev/null 2>&1; then
+  touch "${log}"
+  chown postgres:postgres "${log}"
+  runuser -u postgres -- "${bin}/pg_ctl" --pgdata="${data}" --log="${log}" \
+    --wait --timeout=60 start --options="-h 127.0.0.1 -p ${port} -k ${socket}"
+fi
+"${bin}/pg_isready" --host=127.0.0.1 --port="${port}" --timeout=30 >/dev/null
+echo "PostgreSQL ${version} is ready at 127.0.0.1:${port} (socket ${socket})"

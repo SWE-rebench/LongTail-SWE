@@ -1,0 +1,168 @@
+FROM --platform=linux/amd64 docker.io/library/node:22.23.2-bookworm-slim@sha256:f32b81066cde10a75dbac96646099533316d94bac4150c55da1636e1f0ffdc46 AS ocaml_base
+
+ARG DEBIAN_FRONTEND=noninteractive
+ARG OCAML_VERSION=5.5.0
+ARG DUNE_VERSION=3.24.1
+ARG OPAM_VERSION=2.5.0
+ARG OPAM_SHA256=7aae51da01a66666c8733130852c2c00546eff486effb0999b78145cb75aee74
+ARG GO_VERSION=
+ARG GO_SHA256=
+ARG RUST_VERSION=
+
+ENV TZ=Etc/UTC \
+    LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8 \
+    CI=true \
+    OPAMROOT=/opt/opam \
+    OPAMSWITCH=${OCAML_VERSION} \
+    OPAMYES=1 \
+    OPAMROOTISOK=1 \
+    OPAMCONFIRMLEVEL=unsafe-yes \
+    OPAMERRLOGLEN=0 \
+    OPAMEXTERNALSOLVER=builtin-0install \
+    OPAMRETRIES=10 \
+    OPAMSOLVERTIMEOUT=600 \
+    DUNE_CACHE=disabled \
+    RUSTUP_HOME=/opt/rustup \
+    CARGO_HOME=/opt/cargo \
+    PATH=/opt/opam/${OCAML_VERSION}/bin:/opt/cargo/bin:/usr/local/go/bin:/usr/lib/postgresql/15/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
+    CAML_LD_LIBRARY_PATH=/opt/opam/${OCAML_VERSION}/lib/stublibs:/opt/opam/${OCAML_VERSION}/lib/ocaml/stublibs:/opt/opam/${OCAML_VERSION}/lib/ocaml \
+    OCAML_TOPLEVEL_PATH=/opt/opam/${OCAML_VERSION}/lib/toplevel
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+    autoconf \
+    automake \
+    bash \
+    bc \
+    build-essential \
+    bzip2 \
+    capnproto \
+    ca-certificates \
+    cargo \
+    clang \
+    cmake \
+    curl \
+    default-jdk-headless \
+    file \
+    gfortran \
+    git \
+    git-lfs \
+    jq \
+    libbz2-dev \
+    libcapnp-dev \
+    libev-dev \
+    libffi-dev \
+    libglpk-dev \
+    libgmp-dev \
+    libgraph-easy-perl \
+    libgflags-dev \
+    libjemalloc-dev \
+    liblapack-dev \
+    liblz4-dev \
+    liblmdb-dev \
+    libmpfr-dev \
+    libopenblas-dev \
+    libpcre2-dev \
+    libpq-dev \
+    libprotobuf-dev \
+    librocksdb-dev \
+    libsnappy-dev \
+    libsodium-dev \
+    libsqlite3-dev \
+    libssl-dev \
+    libtool \
+    libz3-dev \
+    libzstd-dev \
+    lsof \
+    m4 \
+    make \
+    ninja-build \
+    openssh-client \
+    patch \
+    perl \
+    pkg-config \
+    postgresql-client \
+    postgresql \
+    procps \
+    protobuf-compiler \
+    python-is-python3 \
+    python3 \
+    python3-pip \
+    python3-venv \
+    ripgrep \
+    rsync \
+    ruby \
+    rustc \
+    shellcheck \
+    time \
+    unzip \
+    wget \
+    xz-utils \
+    z3 \
+    zip \
+    zlib1g-dev \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN if [ -n "${GO_VERSION}" ]; then \
+      test -n "${GO_SHA256}"; \
+      curl -L --fail --retry 5 --retry-delay 5 --retry-all-errors \
+        "https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz" \
+        -o /tmp/go.tar.gz; \
+      echo "${GO_SHA256}  /tmp/go.tar.gz" | sha256sum -c -; \
+      rm -rf /usr/local/go; \
+      tar -C /usr/local -xzf /tmp/go.tar.gz; \
+      rm /tmp/go.tar.gz; \
+    fi \
+ && if [ -n "${RUST_VERSION}" ]; then \
+      curl --proto '=https' --tlsv1.2 --fail --retry 5 \
+        https://static.rust-lang.org/rustup/dist/x86_64-unknown-linux-gnu/rustup-init \
+        -o /tmp/rustup-init; \
+      chmod 0755 /tmp/rustup-init; \
+      /tmp/rustup-init -y --no-modify-path --profile minimal \
+        --default-toolchain "${RUST_VERSION}"; \
+      rm /tmp/rustup-init; \
+    fi
+
+RUN curl -L --fail --retry 5 --retry-delay 5 --retry-all-errors \
+      "https://github.com/ocaml/opam/releases/download/${OPAM_VERSION}/opam-${OPAM_VERSION}-x86_64-linux" \
+      -o /tmp/opam \
+ && echo "${OPAM_SHA256}  /tmp/opam" | sha256sum -c - \
+ && install -m 0755 /tmp/opam /usr/local/bin/opam \
+ && rm /tmp/opam \
+ && opam init --bare --disable-sandboxing --no-setup --yes \
+ && opam switch create "${OCAML_VERSION}" "ocaml-base-compiler.${OCAML_VERSION}" --yes \
+ && opam install --switch "${OCAML_VERSION}" --yes "dune.${DUNE_VERSION}" ocamlfind
+
+RUN npm install --global --force corepack@0.35.0 \
+ && corepack enable \
+ && npm install --global --force pnpm@10.31.0 \
+ && npm cache clean --force
+
+RUN git lfs install --system \
+ && git config --system --add safe.directory '*' \
+ && install -d -m 0777 /workspace /workspace/.cache /workspace/.config /opt/cargo /opt/rustup \
+ && adduser --disabled-password --gecos '' nonroot \
+ && chown -R nonroot:nonroot /workspace /opt/opam /opt/cargo /opt/rustup \
+ && printf '%s\n' "eval \"\$(opam env --switch=${OCAML_VERSION} --set-switch)\"" > /etc/profile.d/opam.sh
+
+RUN ocamlc -version \
+ && dune --version \
+ && opam --version \
+ && node --version \
+ && npm --version \
+ && pnpm --version \
+ && python3 --version \
+ && cargo --version \
+ && java -version \
+ && protoc --version \
+ && pkg-config --exists protobuf \
+ && test -f /usr/include/google/protobuf/message.h \
+ && capnp --version \
+ && pg_config --version \
+ && if [ -n "${GO_VERSION}" ]; then test "$(go version | awk '{print $3}')" = "go${GO_VERSION}"; fi \
+ && if [ -n "${RUST_VERSION}" ]; then test "$(rustc --version | awk '{print $2}')" = "${RUST_VERSION}"; fi \
+ && git --version \
+ && rg --version
+
+WORKDIR /workspace

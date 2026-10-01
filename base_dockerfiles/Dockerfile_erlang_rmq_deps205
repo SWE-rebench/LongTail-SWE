@@ -1,0 +1,23 @@
+# RECONSTRUCTED from the dependency-snapshot procedure used for the published
+# image: the RabbitMQ stream-S3 plugin checkout is built once (gmake test-build) on top of the
+# pinned framework image, and the resulting dependency closure (deps/ and .erlang.mk,
+# excluding the plugin itself) is kept in /opt/rabbitmq-server.
+FROM erlang_base:v2026-08-20-e27-rmqsts-bdf98c8-r3
+
+USER root
+ARG PROJECT_BASE_COMMIT=2485ceac58dbc91305eb7cebc121b8e92c50fb03
+RUN set -eux; \
+    git clone --no-tags https://github.com/amazon-mq/rabbitmq-stream-s3.git /tmp/rabbitmq-stream-s3; \
+    git -C /tmp/rabbitmq-stream-s3 checkout --detach "$PROJECT_BASE_COMMIT"; \
+    rm -rf /opt/rabbitmq-server/deps/rabbitmq_stream_s3; \
+    cp -a /tmp/rabbitmq-stream-s3 /opt/rabbitmq-server/deps/rabbitmq_stream_s3; \
+    cd /opt/rabbitmq-server/deps/rabbitmq_stream_s3; \
+    env -u LD_LIBRARY_PATH -u LD_PRELOAD gmake test-build; \
+    rm -rf /opt/rabbitmq-server/deps/rabbitmq_stream_s3 /tmp/rabbitmq-stream-s3; \
+    test -d /opt/rabbitmq-server/deps/osiris; \
+    test -d /opt/rabbitmq-server/deps/gun; \
+    test -d /opt/rabbitmq-server/deps/khepri; \
+    test -d /opt/rabbitmq-server/deps/rabbit; \
+    chmod -R a+rX /opt/rabbitmq-server
+
+WORKDIR /workspace
