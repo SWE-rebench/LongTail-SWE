@@ -1,19 +1,20 @@
 # Longtail-SWE: environments, evaluation, and solver–judge–repair prompts
 
 Minimal replication material for *Longtail-SWE: High Quality SWE Tasks for Underrepresented
-Languages* (237 tasks, 13 languages: Clojure, Dart, Elixir, Erlang, F#, Haskell, Julia,
+Languages* (237 benchmark tasks plus a 296-task easier companion set, 13 languages: Clojure, Dart, Elixir, Erlang, F#, Haskell, Julia,
 Kotlin, Lua, OCaml, R, Scala, Swift).
 
 | Path | Content |
 | --- | --- |
-| `data/longtail_tasks.json` | The 237 final tasks (statement, reference patch, test patch, F2P/P2P, install/test commands, log parser). |
+| `data/longtail_tasks.json` | The 237-task Longtail-SWE benchmark (statement, reference patch, test patch, F2P/P2P, install/test commands, log parser). |
+| `data/longtail_easy_tasks.json` | The 296-task easier companion set, same format. |
 | `LICENSE`, `data/LICENSE.md`, `LICENSE-CC-BY-4.0.txt` | MIT for code; CC BY 4.0 for original dataset contributions; third-party materials keep their licenses. |
-| `base_images.yaml`, `base_dockerfiles/` | The 29 base images used by the tasks plus the 5 intermediate images they are built from (34 build steps in total). |
+| `base_images.yaml`, `base_dockerfiles/` | The 32 base images used by the two task sets plus the 5 intermediate images they are built from (37 build steps in total). |
 | `combine.Dockerfile.j2` | Instance image template: clone at the base commit, run the install commands. |
 | `scripts/build_base_images.py` | Builds base images in dependency order. |
 | `scripts/build_instance_images.py` | Renders and builds one image per task. |
 | `scripts/eval.py` | Applies a solution patch and the test patch in the instance image, runs the test command, parses the log, and checks F2P + P2P. |
-| `lib/log_parsers.py` | The 21 log parsers referenced by the tasks. |
+| `lib/log_parsers.py` | The 22 log parsers referenced by the tasks. |
 | `prompts/` | Solver, judge, and repairer prompts as Jinja2 templates (no agent-runtime instructions). |
 | `longtail/prompts.py` | Renders the templates (`solver_*`, `worker_system_prompt`, `judge_*`, `repair_*`). |
 | `longtail/schemas.py`, `artifacts.py`, `state.py` | Judge-verdict and repair-submission schemas, extraction from agent output, revision state, verdict routing, test-patch scope checks. |
@@ -27,6 +28,7 @@ Requires Docker, Git, and Python 3.11+.
 ```bash
 pip install -r requirements.txt
 python scripts/build_base_images.py --language Clojure          # or no flag for all languages
+#   --tasks data/longtail_easy_tasks.json builds only the images of that task set
 python scripts/build_instance_images.py --instance-ids askonomm__dompa-16
 python scripts/eval.py --golden-eval --instance-ids askonomm__dompa-16
 ```
@@ -39,6 +41,7 @@ tagged locally as `name:tag` exactly as referenced by `install_config.base_image
 images are tagged `longtail/<lowercased instance_id>`. Building every image needs substantial
 disk space and network access (GitHub, package registries).
 
+All scripts default to `data/longtail_tasks.json`; pass `--json data/longtail_easy_tasks.json` for the easy set.
 To evaluate your own solutions pass `--patches patches.json`, a list of
 `{"instance_id": ..., "patch": ...}` objects, instead of `--golden-eval`.
 
@@ -87,19 +90,18 @@ and are left unchanged.
 
 ## Data notes
 
-`data/longtail_tasks.json` keeps only the fields needed to build and evaluate the tasks. Internal
+`data/longtail_tasks.json` and `data/longtail_easy_tasks.json` keep only the fields needed to build and evaluate the tasks. Internal
 image names, PR descriptions, PR authors, and annotation metadata were removed; `pr_url` is
 kept for provenance. `problem_statement` is the statement the solver sees. It equals
 `problem_statement_base` (the statement after the initial audit, possibly containing `[HIDDEN]` redactions of
-implementation hints) plus, for the 202 tasks repaired with an addendum, the `### Additional contract requirements`
-section whose text is `contract_addendum` (empty for the other 35). `license` is the license of the source repository.
+implementation hints) plus, for the tasks repaired with an addendum (202 of 237 in the benchmark, 244 of 296 in the easy set), the `### Additional contract requirements`
+section whose text is `contract_addendum` (empty otherwise). `license` is the license of the source repository.
 
 ## Relation to the paper
 
 This repository contains the 237-task Longtail-SWE benchmark, its executable environments, the evaluation
 protocol, and the prompts, schemas, and settings of the auditor, solver, judge, and repairer. The paper's
-supplementary archive additionally contains material that is **not** part of this repository: the 296-task
-companion set, the raw issue texts and original tests, agent trajectories, audit and repair histories (the
+supplementary archive additionally contains material that is **not** part of this repository: the raw issue texts and original tests, agent trajectories, audit and repair histories (the
 intermediate task revisions), and the data-collection code. The scaffold that executes the agents and the repair
 validator are also not included.
 

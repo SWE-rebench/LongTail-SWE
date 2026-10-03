@@ -1,4 +1,5 @@
-# Base images referenced by data/longtail_tasks.json (install_config.base_image_name).
+# Base images referenced by data/longtail_tasks.json and data/longtail_easy_tasks.json
+# (install_config.base_image_name).
 #
 # Every entry is built locally as `<tag>` (no registry prefix); `parent` entries are
 # built first. `scripts/build_base_images.py` reads this file.
@@ -40,6 +41,22 @@ images:
   - tag: erlang_base:v2026-08-18-erlang-otp27-rebench
     dockerfile: Dockerfile_erlang_otp27
     parent: elixir_base:v2026-07-02-elixir-1.18.4-otp27-rebench
+    language: Erlang
+    role: task
+    provenance: exact
+  - tag: elixir_base:v2026-08-14-elixir-1.18.4-otp27-node24-rebench
+    dockerfile: Dockerfile_elixir_node24
+    language: Elixir
+    role: task
+    provenance: exact
+  - tag: elixir_base:v2026-08-14-elixir-1.19.4-otp28-rust1.85-postgres16-rebench
+    dockerfile: Dockerfile_elixir_rust185_postgres16
+    language: Elixir
+    role: task
+    provenance: exact
+  - tag: erlang_base:v2026-08-19-erlang-otp27-gperf-3-1-rebench
+    dockerfile: Dockerfile_erlang_otp27_gperf
+    parent: erlang_base:v2026-08-18-erlang-otp27-rebench
     language: Erlang
     role: task
     provenance: exact

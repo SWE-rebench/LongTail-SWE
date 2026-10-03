@@ -22,13 +22,16 @@ from longtail.prompts import (  # noqa: E402
 )
 
 TASKS = json.loads((ROOT / "data" / "longtail_tasks.json").read_text(encoding="utf-8"))
+EASY_TASKS = json.loads((ROOT / "data" / "longtail_easy_tasks.json").read_text(encoding="utf-8"))
+ALL_TASKS = TASKS + EASY_TASKS
 IMAGES = yaml.safe_load((ROOT / "base_images.yaml").read_text(encoding="utf-8"))["images"]
 
 
 def test_tasks_are_well_formed():
-    ids = [t["instance_id"] for t in TASKS]
-    assert len(ids) == len(set(ids)) == 237
-    for t in TASKS:
+    ids = [t["instance_id"] for t in ALL_TASKS]
+    assert len(TASKS) == 237 and len(EASY_TASKS) == 296
+    assert len(ids) == len(set(ids)) == 533
+    for t in ALL_TASKS:
         assert t["patch"] and t["test_patch"] and t["FAIL_TO_PASS"]
         assert not set(t["FAIL_TO_PASS"]) & set(t["PASS_TO_PASS"])
         assert t["install_config"]["log_parser"] in NAME_TO_PARSER
@@ -37,7 +40,7 @@ def test_tasks_are_well_formed():
 
 def test_every_base_image_is_defined_and_buildable():
     by_tag = {i["tag"]: i for i in IMAGES}
-    for t in TASKS:
+    for t in ALL_TASKS:
         assert t["install_config"]["base_image_name"] in by_tag
     for image in IMAGES:
         if "alias_of" in image:
@@ -108,8 +111,8 @@ def test_prompts_have_no_agent_runtime_instructions():
 
 def test_statement_split_and_licenses():
     heading = "### Additional contract requirements"
-    allowed = {"MIT", "Apache-2.0", "BSD-2-Clause", "BSD-3-Clause", "Unlicense"}
-    for t in TASKS:
+    allowed = {"MIT", "Apache-2.0", "BSD-2-Clause", "BSD-3-Clause", "Unlicense", "ISC", "CC0-1.0"}
+    for t in ALL_TASKS:
         assert t["license"] in allowed
         if t["contract_addendum"]:
             assert heading in t["problem_statement"]

@@ -1,7 +1,7 @@
 """Log parsers used by the Longtail-SWE tasks (install_config.log_parser).
 
-Pruned from the full parser collection to the parsers referenced by
-data/longtail_tasks.json and their helpers.
+Pruned from the full parser collection to the parsers referenced by the task files in
+data/ and their helpers.
 """
 import json
 import re
@@ -1432,6 +1432,53 @@ def parse_log_ocaml_v3(log: str) -> dict[str, str]:
 
     return results
 
+def _ocaml_test_section(log: str) -> str:
+    normalized = ANSI_ESCAPE_RE.sub("", log)
+    start_marker = "\n___TESTS_SECTION___\n"
+    end_marker = "\n___TESTS_SECTION_END___"
+    start = normalized.find(start_marker)
+    if start < 0:
+        return normalized
+    start += len(start_marker)
+    end = normalized.find(end_marker, start)
+    return normalized[start:end] if end >= 0 else normalized[start:]
+
+def parse_log_ocaml_v6(log: str) -> dict[str, str]:
+    """Parse an opt-in aggregate OCaml command result from explicit evidence."""
+    section = _ocaml_test_section(log)
+    failure_patterns = (
+        r"^.*\[(?:FAIL|FAILED)\](?!:)",
+        r"^\s*FAIL(?:\s|:)",
+        r"\bFAILED:",
+        r"^\s*RESULT\s+.+\s+-\s+(?:FAIL|ERROR)\b",
+        r"^\s*Fatal error:",
+        r"^\s*Error:",
+        r"<failure(?:\s|>)",
+        r"<error(?:\s|>)",
+        r"^\s*[1-9]\d*\s+(?:failures?!|unsuccessful\b)",
+        r"^[.FES]*F[.FES]*$",
+    )
+    success_patterns = (
+        r"^.*\[(?:OK|PASS|PASSED)\](?!:)",
+        r"^\s*RESULT\s+.+\s+-\s+PASS\b",
+        r"^\s*[Oo][Kk]\s{2,}",
+        r"\bTest Successful\b",
+        r"<testcase(?:\s|>)",
+        r"^\s*[^\n:]+:\s*OK\s*$",
+        r'"success"\s*:\s*[1-9]\d*',
+        r"\bAll\b[^\n]*\btests passed!",
+        r"^\.+$",
+        r"\bpassed$",
+    )
+    flags = re.MULTILINE
+    if any(re.search(pattern, section, flags) for pattern in failure_patterns):
+        status = TestStatus.FAILED.value
+    elif any(re.search(pattern, section, flags) for pattern in success_patterns):
+        status = TestStatus.PASSED.value
+    else:
+        return {}
+    return {"__ocaml_test_command__": status}
+
 def parse_logs_r_junit(log: str) -> dict[str, str]:
     """Parse R testthat JUnit XML output and return {full_test_name: status}.
 
@@ -1698,6 +1745,7 @@ NAME_TO_PARSER = {
     "parse_log_lein": parse_log_lein,
     "parse_log_ocaml": parse_log_ocaml,
     "parse_log_ocaml_v3": parse_log_ocaml_v3,
+    "parse_log_ocaml_v6": parse_log_ocaml_v6,
     "parse_log_r": parse_log_r,
     "parse_log_rebench_explicit_v1": parse_log_rebench_explicit_v1,
     "parse_log_scala": parse_log_scala,
