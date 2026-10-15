@@ -24,6 +24,20 @@ from lib.log_parsers import NAME_TO_PARSER
 from lib.naming import instance_image_tag
 
 APPLY = "git apply -v --3way --recount --ignore-space-change --whitespace=nowarn"
+# Fallbacks of the corrected evaluator: retry with --ignore-whitespace (CRLF / whitespace drift). For the
+# solution patch only, a partial --reject apply is kept, so the build and tests still run.
+APPLY_WS = "git apply -v --recount --ignore-whitespace --whitespace=nowarn"
+APPLY_REJECT = "git apply -v --recount --ignore-whitespace --whitespace=nowarn --reject"
+
+
+def apply_solution(path: str) -> str:
+    return (f"{APPLY} {path} || {{ git reset -q --hard HEAD; {APPLY_WS} {path}; }} "
+            f"|| {{ git reset -q --hard HEAD; {APPLY_REJECT} {path} || echo '___PATCH_PARTIALLY_APPLIED___'; }}")
+
+
+def apply_test_patch(path: str, test_patch: str) -> str:
+    restore = "; ".join(restore_commands(test_patch)) or "true"
+    return f"{APPLY} {path} || {{ {restore}; {APPLY_WS} {path}; }}"
 
 # Timing suffixes some runners embed in test names; stripped on both sides.
 _TIMING_RES = [
@@ -71,9 +85,9 @@ def evaluate(spec: dict, patch: str, image: str, logs_dir: Path, timeout: int) -
         (Path(tmp) / "patch.diff").write_text(patch, encoding="utf-8")
         (Path(tmp) / "test_patch.diff").write_text(spec["test_patch"], encoding="utf-8")
         script = "\n".join(
-            ["set -e", "git reset --hard HEAD", f"{APPLY} /patches/patch.diff"]
+            ["set -e", "git reset --hard HEAD", apply_solution("/patches/patch.diff")]
             + restore_commands(spec["test_patch"])
-            + [f"{APPLY} /patches/test_patch.diff", "set +e", "echo ___TESTS_SECTION___"]
+            + [apply_test_patch("/patches/test_patch.diff", spec["test_patch"]), "set +e", "echo ___TESTS_SECTION___"]
             + ["("]
             + test_cmds
             + [")", "status=$?", "echo ___TESTS_SECTION_END___", 'echo "___TESTS_EXIT_CODE___=$status"', 'exit "$status"']

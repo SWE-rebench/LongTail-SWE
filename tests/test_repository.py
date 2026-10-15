@@ -29,8 +29,8 @@ IMAGES = yaml.safe_load((ROOT / "base_images.yaml").read_text(encoding="utf-8"))
 
 def test_tasks_are_well_formed():
     ids = [t["instance_id"] for t in ALL_TASKS]
-    assert len(TASKS) == 237 and len(EASY_TASKS) == 296
-    assert len(ids) == len(set(ids)) == 533
+    assert len(TASKS) == 206 and len(EASY_TASKS) == 296
+    assert len(ids) == len(set(ids)) == 502
     for t in ALL_TASKS:
         assert t["patch"] and t["test_patch"] and t["FAIL_TO_PASS"]
         assert not set(t["FAIL_TO_PASS"]) & set(t["PASS_TO_PASS"])
@@ -120,3 +120,23 @@ def test_statement_split_and_licenses():
             assert t["problem_statement"].startswith(t["problem_statement_base"])
         else:
             assert t["problem_statement"] == t["problem_statement_base"]
+
+
+def test_excluded_tasks_are_not_in_the_benchmark():
+    excluded = json.loads((ROOT / "data" / "excluded_tasks.json").read_text(encoding="utf-8"))
+    assert len(excluded) == 31
+    assert not {e["instance_id"] for e in excluded} & {t["instance_id"] for t in ALL_TASKS}
+
+
+def test_statement_is_base_plus_addendum():
+    for t in ALL_TASKS:
+        expected = t["problem_statement_base"]
+        if t["contract_addendum"]:
+            expected += "\n\n### Additional contract requirements\n\n" + t["contract_addendum"]
+        assert t["problem_statement"] == expected, t["instance_id"]
+
+
+def test_dart_parser_reads_glued_progress_lines():
+    log = "00:01 +0: /w/test/a_test.dart: first\nsome output00:02 +1: /w/test/a_test.dart: second\n"
+    parsed = NAME_TO_PARSER["parse_log_dart_v3"](log)
+    assert any("second" in k for k in parsed), parsed

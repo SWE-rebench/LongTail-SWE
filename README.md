@@ -1,12 +1,13 @@
 # Longtail-SWE: environments, evaluation, and solver–judge–repair prompts
 
 Minimal replication material for *Longtail-SWE: High Quality SWE Tasks for Underrepresented
-Languages* (237 benchmark tasks plus a 296-task easier companion set, 13 languages: Clojure, Dart, Elixir, Erlang, F#, Haskell, Julia,
+Languages* (206 benchmark tasks plus a 296-task easier companion set, 13 languages: Clojure, Dart, Elixir, Erlang, F#, Haskell, Julia,
 Kotlin, Lua, OCaml, R, Scala, Swift).
 
 | Path | Content |
 | --- | --- |
-| `data/longtail_tasks.json` | The 237-task Longtail-SWE benchmark (statement, reference patch, test patch, F2P/P2P, install/test commands, log parser). |
+| `data/longtail_tasks.json` | The 206-task Longtail-SWE benchmark after the post-evaluation audit (statement, reference patch, test patch, F2P/P2P, install/test commands, log parser). |
+| `data/excluded_tasks.json` | The 31 tasks of the original 237-task set that the audit removed, with the reason. |
 | `data/longtail_easy_tasks.json` | The 296-task easier companion set, same format. |
 | `LICENSE`, `data/LICENSE.md`, `LICENSE-CC-BY-4.0.txt` | MIT for code; CC BY 4.0 for original dataset contributions; third-party materials keep their licenses. |
 | `base_images.yaml`, `base_dockerfiles/` | The 32 base images used by the two task sets plus the 5 intermediate images they are built from (37 build steps in total). |
@@ -94,12 +95,32 @@ and are left unchanged.
 image names, PR descriptions, PR authors, and annotation metadata were removed; `pr_url` is
 kept for provenance. `problem_statement` is the statement the solver sees. It equals
 `problem_statement_base` (the statement after the initial audit, possibly containing `[HIDDEN]` redactions of
-implementation hints) plus, for the tasks repaired with an addendum (202 of 237 in the benchmark, 244 of 296 in the easy set), the `### Additional contract requirements`
+implementation hints) plus, for the tasks repaired with an addendum (177 of 206 in the benchmark, 244 of 296 in the easy set), the `### Additional contract requirements`
 section whose text is `contract_addendum` (empty otherwise). `license` is the license of the source repository.
+
+## Post-evaluation audit (current version)
+
+The benchmark first had 237 tasks (git tag `v1.0-237`). A post-evaluation audit (paper, Appendix "Post-evaluation
+audit and refinement") corrected the evaluator, checked every stored solver run, and repaired tests and statements.
+The current `data/longtail_tasks.json` keeps 206 tasks:
+
+| Group | Tasks |
+| --- | --- |
+| Accepted by the audit, statement unchanged | 145 |
+| Accepted by the audit, statement clarified (models re-run on the new statement) | 32 |
+| Repaired, audit pending, statement unchanged | 21 |
+| Repaired, audit pending, editorial statement change only | 8 |
+
+Removed (`data/excluded_tasks.json`): 19 tasks without an acceptable repair, 2 unsuitable tasks, and 10 tasks whose
+statement gained new requirements. For the repaired tasks, `test_patch`, `FAIL_TO_PASS`/`PASS_TO_PASS` (the tests that
+pass in two reference-patch runs), and in 22 tasks `test_cmd` changed. `scripts/eval.py` follows the corrected
+evaluator: solution patch, then restore of every test-patch path (renames included), then the test patch; a failed
+`git apply` is retried with `--ignore-whitespace`, and a solution patch that still does not apply is applied partially
+with `--reject` so the tests still run. The Dart parser also reads progress lines glued to unterminated test output.
 
 ## Relation to the paper
 
-This repository contains the 237-task Longtail-SWE benchmark, its executable environments, the evaluation
+This repository contains the 206-task Longtail-SWE benchmark, its executable environments, the evaluation
 protocol, and the prompts, schemas, and settings of the auditor, solver, judge, and repairer. The paper's
 supplementary archive additionally contains material that is **not** part of this repository: the raw issue texts and original tests, agent trajectories, audit and repair histories (the
 intermediate task revisions), and the data-collection code. The scaffold that executes the agents and the repair

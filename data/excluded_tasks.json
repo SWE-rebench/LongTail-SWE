@@ -1,0 +1,126 @@
+[
+ {
+  "instance_id": "actorforth__actorforth-32",
+  "reason": "unfixed: no repaired version passed the post-evaluation audit"
+ },
+ {
+  "instance_id": "agentjido__req_llm-827",
+  "reason": "statement gained new requirements during repair; repair not yet verified and no evaluation on the new statement"
+ },
+ {
+  "instance_id": "agentjido__req_llm-934",
+  "reason": "unfixed: no repaired version passed the post-evaluation audit"
+ },
+ {
+  "instance_id": "agntcy__oasf-473",
+  "reason": "unsuitable: not suitable for this benchmark (pure refactor, or tests need Docker)"
+ },
+ {
+  "instance_id": "blockether__spel-60",
+  "reason": "statement gained new requirements during repair; repair not yet verified and no evaluation on the new statement"
+ },
+ {
+  "instance_id": "dart-lang__tools-2340",
+  "reason": "statement gained new requirements during repair; repair not yet verified and no evaluation on the new statement"
+ },
+ {
+  "instance_id": "demystifyfp__fstoolkit.errorhandling-348",
+  "reason": "statement gained new requirements during repair; repair not yet verified and no evaluation on the new statement"
+ },
+ {
+  "instance_id": "eclipse-apoapsis__ort-server-4304",
+  "reason": "unsuitable: not suitable for this benchmark (pure refactor, or tests need Docker)"
+ },
+ {
+  "instance_id": "gilead-biostats__qcthat-154",
+  "reason": "unfixed: no repaired version passed the post-evaluation audit"
+ },
+ {
+  "instance_id": "huddlz-hq__cucumber-44",
+  "reason": "unfixed: no repaired version passed the post-evaluation audit"
+ },
+ {
+  "instance_id": "huddlz-hq__cucumber-45",
+  "reason": "statement gained new requirements during repair; repair not yet verified and no evaluation on the new statement"
+ },
+ {
+  "instance_id": "jacquescarette__drasil-5397",
+  "reason": "unfixed: no repaired version passed the post-evaluation audit"
+ },
+ {
+  "instance_id": "jappeace__hatter-182",
+  "reason": "unfixed: no repaired version passed the post-evaluation audit"
+ },
+ {
+  "instance_id": "jeong-sik__masc-4663",
+  "reason": "unfixed: no repaired version passed the post-evaluation audit"
+ },
+ {
+  "instance_id": "johnynek__bosatsu-1579",
+  "reason": "statement gained new requirements during repair; repair not yet verified and no evaluation on the new statement"
+ },
+ {
+  "instance_id": "johnynek__bosatsu-2306",
+  "reason": "statement gained new requirements during repair; repair not yet verified and no evaluation on the new statement"
+ },
+ {
+  "instance_id": "julialang__julia-62374",
+  "reason": "unfixed: no repaired version passed the post-evaluation audit"
+ },
+ {
+  "instance_id": "juliapluto__plutoplotly.jl-69",
+  "reason": "unfixed: no repaired version passed the post-evaluation audit"
+ },
+ {
+  "instance_id": "kamegoro__tobira.nvim-140",
+  "reason": "statement gained new requirements during repair; repair not yet verified and no evaluation on the new statement"
+ },
+ {
+  "instance_id": "lucasdicioccio__agents-exe-562",
+  "reason": "unfixed: no repaired version passed the post-evaluation audit"
+ },
+ {
+  "instance_id": "maples7__vibechard-20",
+  "reason": "unfixed: no repaired version passed the post-evaluation audit"
+ },
+ {
+  "instance_id": "ml-in-barcelona__server-reason-react-365",
+  "reason": "statement gained new requirements during repair; repair not yet verified and no evaluation on the new statement"
+ },
+ {
+  "instance_id": "ohno__antique.jl-130",
+  "reason": "unfixed: no repaired version passed the post-evaluation audit"
+ },
+ {
+  "instance_id": "ordo-one__fuzzymatch-17",
+  "reason": "unfixed: no repaired version passed the post-evaluation audit"
+ },
+ {
+  "instance_id": "quantumkithub__pepskit.jl-329",
+  "reason": "unfixed: no repaired version passed the post-evaluation audit"
+ },
+ {
+  "instance_id": "romychab__hilt-autobind-25",
+  "reason": "unfixed: no repaired version passed the post-evaluation audit"
+ },
+ {
+  "instance_id": "samply__blaze-3391",
+  "reason": "unfixed: no repaired version passed the post-evaluation audit"
+ },
+ {
+  "instance_id": "sudo-tee__opencode.nvim-257",
+  "reason": "statement gained new requirements during repair; repair not yet verified and no evaluation on the new statement"
+ },
+ {
+  "instance_id": "well-typed__hs-bindgen-2105",
+  "reason": "unfixed: no repaired version passed the post-evaluation audit"
+ },
+ {
+  "instance_id": "widgrensit__asobi-464",
+  "reason": "unfixed: no repaired version passed the post-evaluation audit"
+ },
+ {
+  "instance_id": "zotonic__z_stdlib-118",
+  "reason": "unfixed: no repaired version passed the post-evaluation audit"
+ }
+]

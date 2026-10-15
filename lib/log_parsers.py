@@ -1165,6 +1165,10 @@ def parse_log_dart_v3(log: str) -> dict[str, str]:
     progress_line_re = re.compile(
         r"^\d+:\d+\s+\+\d+(?:\s+-\d+)?:\s+(?P<body>.+)$"
     )
+    # A test that prints output without a trailing newline glues the next progress line onto it.
+    glued_progress_re = re.compile(
+        r"(?<!\d)\d{2}:\d{2}\s+\+\d+(?:\s+-\d+)?:\s+(?P<body>.+)$"
+    )
     absolute_test_re = re.compile(r"^(?P<path>/[^:]+\.dart):\s+(?P<name>.+)$")
     loading_re = re.compile(r"^loading\s+(?P<path>/[^:]+\.dart)$")
     summaries = {"Some tests failed.", "All tests passed!"}
@@ -1175,7 +1179,9 @@ def parse_log_dart_v3(log: str) -> dict[str, str]:
             continue
 
         if not (m := progress_line_re.match(line)):
-            continue
+            m = glued_progress_re.search(line)
+            if not m:
+                continue
 
         body = m.group("body")
         has_error_marker = body.endswith(" [E]")
