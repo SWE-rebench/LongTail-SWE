@@ -1,0 +1,2142 @@
+{
+  "schema_version": "longtail-paper-annotations-v1",
+  "rows": [
+    {
+      "instance_id": "actorforth__actorforth-35",
+      "language": "Erlang",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "agentjido__jido-153",
+      "language": "Elixir",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "minor_bug",
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "agentjido__jido-286",
+      "language": "Elixir",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "integration_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "agentjido__jido_ai-299",
+      "language": "Elixir",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "agentjido__jido_ai-325",
+      "language": "Elixir",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "major_bug",
+        "integration_feat",
+        "security_bug",
+        "edge_case_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "agentjido__req_llm-543",
+      "language": "Elixir",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "agentjido__req_llm-670",
+      "language": "Elixir",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "major_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "agentjido__req_llm-819",
+      "language": "Elixir",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "major_bug",
+        "edge_case_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "agentjido__req_llm-887",
+      "language": "Elixir",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "agentjido__req_llm-898",
+      "language": "Elixir",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "edge_case_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "agentjido__req_llm-902",
+      "language": "Elixir",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "integration_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "agentjido__req_llm-908",
+      "language": "Elixir",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "almartin82__njschooldata-278",
+      "language": "R",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "integration_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "amazon-mq__rabbitmq-stream-s3-205",
+      "language": "Erlang",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "apache__datafusion-comet-4010",
+      "language": "Scala",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat",
+        "performance_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "apache__datafusion-comet-4429",
+      "language": "Scala",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "aplpolaris__promptfx-698",
+      "language": "Kotlin",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "ark-ecs__ark.jl-470",
+      "language": "Julia",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "ark-ecs__ark.jl-625",
+      "language": "Julia",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "ark-ecs__ark.jl-677",
+      "language": "Julia",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "askonomm__dompa-16",
+      "language": "Clojure",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "major_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "aviatesk__jetls.jl-726",
+      "language": "Julia",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "minor_bug",
+        "edge_case_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "aws-cqc__devicelayout.jl-147",
+      "language": "Julia",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "major_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "babashka__cli-162",
+      "language": "Clojure",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "minor_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "bartblast__hologram-905",
+      "language": "Elixir",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "biocad__openapi3-119",
+      "language": "Haskell",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "major_bug",
+        "integration_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "B1"
+    },
+    {
+      "instance_id": "bitcoin-s__bitcoin-s-6288",
+      "language": "Scala",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "integration_feat",
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "bitcoin-s__bitcoin-s-6354",
+      "language": "Scala",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "integration_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "brandonchinn178__kdl-hs-20",
+      "language": "Haskell",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "bretth18__seeleseek-9",
+      "language": "Swift",
+      "difficulty": "easy",
+      "task_type_labels": [
+        "integration_feat",
+        "minor_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "carlos-algms__agentic.nvim-132",
+      "language": "Lua",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat",
+        "ui_ux_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "cbl-dart__cbl-dart-917",
+      "language": "Dart",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "minor_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "clojure-lsp__clojure-lsp-2366",
+      "language": "Clojure",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "major_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "cocoanetics__swiftmcp-129",
+      "language": "Swift",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "dev_ops_enh"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "cocoanetics__swiftmcp-148",
+      "language": "Swift",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "cocoanetics__swiftmcp-71",
+      "language": "Swift",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "dev_ops_enh",
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "coder__claudecode.nvim-286",
+      "language": "Lua",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "edge_case_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "coder__claudecode.nvim-290",
+      "language": "Lua",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "major_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "cognitect-labs__aws-api-303",
+      "language": "Clojure",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "major_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "corveil__crow-531",
+      "language": "Swift",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "integration_feat",
+        "major_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "corveil__crow-905",
+      "language": "Swift",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "performance_bug",
+        "security_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "cossio__restrictedboltzmannmachines.jl-177",
+      "language": "Julia",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "dark-trench__squidie-420",
+      "language": "Elixir",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "dart-lang__native-2940",
+      "language": "Dart",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "dart-lang__native-2978",
+      "language": "Dart",
+      "difficulty": "easy",
+      "task_type_labels": [
+        "minor_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "databrickslabs__brickster-218",
+      "language": "R",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat",
+        "major_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "deezer__caupain-72",
+      "language": "Kotlin",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "demystifyfp__fstoolkit.errorhandling-347",
+      "language": "F#",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "dev-cycles__contextive-119",
+      "language": "F#",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "earthyscience__easyhybrid.jl-274",
+      "language": "Julia",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "editor-code-assistant__eca-461",
+      "language": "Clojure",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "integration_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "eigr__mesh-3",
+      "language": "Elixir",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "major_bug",
+        "edge_case_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "elixir-lang__elixir-15389",
+      "language": "Elixir",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "major_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "epgsql__pooler-106",
+      "language": "Erlang",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "major_bug",
+        "performance_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "erlsci__iso8601-69",
+      "language": "Erlang",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "eseidel__space_gen-357",
+      "language": "Dart",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "esl__amoc-193",
+      "language": "Erlang",
+      "difficulty": "easy",
+      "task_type_labels": [
+        "integration_feat",
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "esmuellert__codediff.nvim-269",
+      "language": "Lua",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "esmuellert__codediff.nvim-405",
+      "language": "Lua",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "major_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "esmuellert__codediff.nvim-410",
+      "language": "Lua",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "ui_ux_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "esmuellert__codediff.nvim-442",
+      "language": "Lua",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "ui_ux_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "etacassiopeia__zio-openfeature-286",
+      "language": "Scala",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "major_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "expert-lsp__expert-454",
+      "language": "Elixir",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "major_bug",
+        "edge_case_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "fetch-rewards__swift-mocking-146",
+      "language": "Swift",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "major_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "firebase__firebase-functions-dart-217",
+      "language": "Dart",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "flutter__packages-10816",
+      "language": "Dart",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "integration_feat",
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "flutter__packages-12032",
+      "language": "Dart",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "frank-fs__frank-179",
+      "language": "F#",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "fsprojects__fsharp.control.taskseq-380",
+      "language": "F#",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "garrekstemo__transfermatrix.jl-111",
+      "language": "Julia",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "grantmcdermott__tinyplot-651",
+      "language": "R",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "edge_case_bug",
+        "minor_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "graphframes__graphframes-792",
+      "language": "Scala",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "integration_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "greghib__void-1054",
+      "language": "Kotlin",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "gridap__gridap.jl-1277",
+      "language": "Julia",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "edge_case_bug",
+        "major_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "hlship__dialog-tool-58",
+      "language": "Clojure",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "minor_bug",
+        "ui_ux_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "home-assistant__android-7187",
+      "language": "Kotlin",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "intersectmbo__cardano-ledger-5528",
+      "language": "Haskell",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "intersectmbo__cardano-ledger-5671",
+      "language": "Haskell",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "minor_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "jacquescarette__drasil-5082",
+      "language": "Haskell",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "major_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "jacquescarette__drasil-5334",
+      "language": "Haskell",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "major_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "jappeace__hatter-126",
+      "language": "Haskell",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "performance_bug",
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "jappeace__hatter-32",
+      "language": "Haskell",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "edge_case_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "jeong-sik__masc-10169",
+      "language": "OCaml",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "major_bug",
+        "performance_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "B9"
+    },
+    {
+      "instance_id": "jeong-sik__masc-1250",
+      "language": "OCaml",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "jeong-sik__masc-13209",
+      "language": "OCaml",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "jeong-sik__masc-1464",
+      "language": "OCaml",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat",
+        "integration_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "jeong-sik__masc-19684",
+      "language": "OCaml",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "major_bug",
+        "security_bug",
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "jeong-sik__masc-21057",
+      "language": "OCaml",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "major_bug",
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "jeong-sik__masc-22468",
+      "language": "OCaml",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "edge_case_bug",
+        "minor_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "jeong-sik__masc-23385",
+      "language": "OCaml",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "major_bug",
+        "edge_case_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "jeong-sik__masc-4332",
+      "language": "OCaml",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "critical_bug",
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "jeong-sik__masc-4675",
+      "language": "OCaml",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "major_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "jeong-sik__masc-4997",
+      "language": "OCaml",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "major_bug",
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "jeong-sik__masc-6364",
+      "language": "OCaml",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "johnynek__bosatsu-1699",
+      "language": "Scala",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "johnynek__bosatsu-1715",
+      "language": "Scala",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "johnynek__bosatsu-1922",
+      "language": "Scala",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "documentation_enh"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "johnynek__bosatsu-1928",
+      "language": "Scala",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "johnynek__bosatsu-2264",
+      "language": "Scala",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "integration_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "juliaactuary__financemodels.jl-282",
+      "language": "Julia",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "major_bug",
+        "edge_case_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "juliadiff__differentiationinterface.jl-1036",
+      "language": "Julia",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "juliaeditorsupport__juliaformatter.jl-1110",
+      "language": "Julia",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "major_bug",
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "juliagpu__cutile.jl-123",
+      "language": "Julia",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "juliagpu__cutile.jl-32",
+      "language": "Julia",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "juliaimages__imagecontrastadjustment.jl-65",
+      "language": "Julia",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "major_bug",
+        "edge_case_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "B5"
+    },
+    {
+      "instance_id": "jvoegele__bond-39",
+      "language": "Elixir",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "jvoegele__bond-48",
+      "language": "Elixir",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "kotlin__dokka-4502",
+      "language": "Kotlin",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "integration_feat",
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "B2"
+    },
+    {
+      "instance_id": "ktahar__ocaml-lp-17",
+      "language": "OCaml",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "integration_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "ktlint__ktlint-3255",
+      "language": "Kotlin",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "kuhumcst__dannet-199",
+      "language": "Clojure",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "dev_ops_enh"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "leehack__mcp_dart-136",
+      "language": "Dart",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "major_bug",
+        "edge_case_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "leehack__mcp_dart-147",
+      "language": "Dart",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "major_bug",
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "lewis6991__gitsigns.nvim-1535",
+      "language": "Lua",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "ui_ux_feat",
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "livekit__client-sdk-android-874",
+      "language": "Kotlin",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "major_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "llm4s__llm4s-634",
+      "language": "Scala",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "minor_bug",
+        "edge_case_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "lrnv__copulas.jl-383",
+      "language": "Julia",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "edge_case_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "martinuzzifrancesco__recurrentlayers.jl-177",
+      "language": "Julia",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "mistweaverco__kulala.nvim-999",
+      "language": "Lua",
+      "difficulty": "easy",
+      "task_type_labels": [
+        "minor_bug",
+        "ui_ux_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "mit-lae__idealgasthermo.jl-11",
+      "language": "Julia",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "integration_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "monkopedia__ksrpc-88",
+      "language": "Kotlin",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "nasa__fpp-906",
+      "language": "Scala",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "neftedollar__fslangmcp-202",
+      "language": "F#",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "minor_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "neftedollar__fslangmcp-43",
+      "language": "F#",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "dev_ops_enh"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "neilberkman__paper_tiger-76",
+      "language": "Elixir",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "neilberkman__paper_tiger-84",
+      "language": "Elixir",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "novonordisk-opensource__whirl-227",
+      "language": "R",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "obsidian-nvim__obsidian.nvim-913",
+      "language": "Lua",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "major_bug",
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "ohdsi__cohortconstructor-696",
+      "language": "R",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "edge_case_bug",
+        "major_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "ohdsi__cohortconstructor-741",
+      "language": "R",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "major_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "open-telemetry__opentelemetry-kotlin-631",
+      "language": "Kotlin",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "minor_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "openclaw__imsg-125",
+      "language": "Swift",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "integration_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "openvoxproject__openvoxdb-226",
+      "language": "Clojure",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "openwallet-foundation__multipaz-1582",
+      "language": "Kotlin",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "dev_ops_enh"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "penelopeysm__flexichains.jl-107",
+      "language": "Julia",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "major_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "penelopeysm__flexichains.jl-174",
+      "language": "Julia",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "penelopeysm__flexichains.jl-229",
+      "language": "Julia",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "pharmaverse__admiral-3134",
+      "language": "R",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat",
+        "major_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "pharmaverse__admiraldev-548",
+      "language": "R",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat",
+        "documentation_enh"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "pharmaverse__anca-1273",
+      "language": "R",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "major_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "pharmaverse__anca-1401",
+      "language": "R",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "major_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "B8"
+    },
+    {
+      "instance_id": "pharmaverse__anca-901",
+      "language": "R",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "phenixdigital__phoenix_storybook-798",
+      "language": "Elixir",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "phranck__tuikit-53",
+      "language": "Swift",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "major_bug",
+        "security_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "qojulia__secondquantizedalgebra.jl-179",
+      "language": "Julia",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "major_bug",
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "quantumkithub__sunrepresentations.jl-46",
+      "language": "Julia",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "performance_bug",
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "quantumkithub__tensorkit.jl-356",
+      "language": "Julia",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "integration_feat",
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "quantumsos__nctssos.jl-262",
+      "language": "Julia",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "documentation_enh",
+        "dev_ops_enh"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "rabbitmq__khepri-357",
+      "language": "Erlang",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "major_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "razzmatazz__csharp-language-server-346",
+      "language": "F#",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "replikativ__spindel-29",
+      "language": "Clojure",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "critical_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "rrousselgit__riverpod-4747",
+      "language": "Dart",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "documentation_enh"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "rstudio__renv-2200",
+      "language": "R",
+      "difficulty": "easy",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "rstudio__renv-2225",
+      "language": "R",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "rstudio__renv-2289",
+      "language": "R",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "regression_bug",
+        "major_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "samply__blaze-3329",
+      "language": "Clojure",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "major_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "samply__blaze-3368",
+      "language": "Clojure",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "major_bug",
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "samply__blaze-3728",
+      "language": "Clojure",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "minor_bug",
+        "edge_case_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "samply__blaze-3960",
+      "language": "Clojure",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "performance_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "scala__scala3-25640",
+      "language": "Scala",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "major_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "scalalandio__chimney-875",
+      "language": "Scala",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "scalalandio__chimney-876",
+      "language": "Scala",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "scalameta__metals-8357",
+      "language": "Scala",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "major_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "scottarbeit__grace-124",
+      "language": "F#",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "scottarbeit__grace-136",
+      "language": "F#",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "scottarbeit__grace-173",
+      "language": "F#",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "dev_ops_enh"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "scottarbeit__grace-400",
+      "language": "F#",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat",
+        "minor_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "scottarbeit__grace-793",
+      "language": "F#",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "scottarbeit__grace-800",
+      "language": "F#",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "scrive__kitab-20",
+      "language": "Haskell",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "scylladb__scylla-migrator-375",
+      "language": "Scala",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "integration_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "serverpod__skills-30",
+      "language": "Dart",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "ui_ux_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "steipete__codexbar-1087",
+      "language": "Swift",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "integration_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "steipete__codexbar-1884",
+      "language": "Swift",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "ui_ux_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "steipete__codexbar-607",
+      "language": "Swift",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "integration_feat",
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "stellio-hub__stellio-context-broker-1742",
+      "language": "Kotlin",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "sudo-tee__opencode.nvim-367",
+      "language": "Lua",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "ui_ux_feat",
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "tfausak__cabal-gild-168",
+      "language": "Haskell",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "minor_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "tg123__myslot-116",
+      "language": "Lua",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "tg123__myslot-121",
+      "language": "Lua",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat",
+        "ui_ux_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "thunderbird__thunderbird-android-10863",
+      "language": "Kotlin",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "integration_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "trixi-framework__trixi.jl-3023",
+      "language": "Julia",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "major_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "tsutsu3__pi-hole-client-631",
+      "language": "Dart",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "major_bug",
+        "ui_ux_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "tulipaenergy__tulipaenergymodel.jl-1653",
+      "language": "Julia",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "tv-labs__lua-285",
+      "language": "Elixir",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "tw0po1nt__fshttp.studio-111",
+      "language": "F#",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "tw0po1nt__fshttp.studio-37",
+      "language": "F#",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "tw0po1nt__fshttp.studio-39",
+      "language": "F#",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "umputun__agterm-318",
+      "language": "Swift",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "integration_feat",
+        "dev_ops_enh"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "well-typed__hs-bindgen-1869",
+      "language": "Haskell",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "edge_case_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "well-typed__hs-bindgen-2068",
+      "language": "Haskell",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "major_bug",
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "well-typed__hs-bindgen-2070",
+      "language": "Haskell",
+      "difficulty": "easy",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "B5"
+    },
+    {
+      "instance_id": "well-typed__hs-bindgen-2073",
+      "language": "Haskell",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "werner-scholtz__kalender-349",
+      "language": "Dart",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "core_feat",
+        "minor_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "widgetbook__widgetbook-1790",
+      "language": "Dart",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "widgrensit__asobi-254",
+      "language": "Erlang",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "security_bug",
+        "major_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "widgrensit__asobi-259",
+      "language": "Erlang",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "critical_bug",
+        "major_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "widgrensit__asobi-317",
+      "language": "Erlang",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "minor_bug",
+        "dev_ops_enh"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "widgrensit__asobi-322",
+      "language": "Erlang",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "major_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "widgrensit__asobi-332",
+      "language": "Erlang",
+      "difficulty": "easy",
+      "task_type_labels": [
+        "major_bug"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "widgrensit__asobi-434",
+      "language": "Erlang",
+      "difficulty": "hard",
+      "task_type_labels": [
+        "performance_bug",
+        "critical_bug"
+      ],
+      "original_v2_path": false,
+      "final_reannotation_code": "A"
+    },
+    {
+      "instance_id": "zebbra__gettext_sigils-10",
+      "language": "Elixir",
+      "difficulty": "medium",
+      "task_type_labels": [
+        "core_feat"
+      ],
+      "original_v2_path": true,
+      "final_reannotation_code": "A"
+    }
+  ],
+  "provenance": {
+    "difficulty_and_task_type": {
+      "source": "final_converged_tasks_hard.json",
+      "sha256": "8f018d55a89d93281e2b1de03584560486bf1267a8114c7bc5aaeddbee6ac9cd",
+      "fields": [
+        "meta.llm_metadata.difficulty",
+        "meta.llm_metadata.pr_categories"
+      ]
+    },
+    "original_v2_path": {
+      "source": "original_patch_ev_funnel_reconciliation.json",
+      "sha256": "bcb487ed4a0eebed370600f8ff3be926b7c7659faa7de9a07bfc090aefb1ba07",
+      "field": "identity_sets_by_language.*.qualifying"
+    },
+    "final_reannotation": {
+      "source": "annotation-final206/annotated_tasks.jsonl",
+      "sha256": "8b3e6d03e4097c2b12b7e9bead8f0381c4f06155bea6d9e680cfe2b438740404",
+      "field": "meta_with_interface.code",
+      "comparison_sha256": "e53e32a971abd1740d06cfeaba5350d69ab7c0b7c31ebc7852758ee3e4e7d5f8"
+    }
+  },
+  "note": "Separate historical annotation stages. Final A labels do not establish correctness; all four newly excluded tasks had final A labels."
+}

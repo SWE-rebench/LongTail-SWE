@@ -1,0 +1,36 @@
+{
+  "tasks": 202,
+  "repositories": 129,
+  "languages": {
+    "Clojure": 13,
+    "Dart": 14,
+    "Elixir": 23,
+    "Erlang": 12,
+    "F#": 16,
+    "Haskell": 14,
+    "Julia": 27,
+    "Kotlin": 12,
+    "Lua": 13,
+    "OCaml": 13,
+    "R": 14,
+    "Scala": 18,
+    "Swift": 13
+  },
+  "licenses": {
+    "Apache-2.0": 87,
+    "BSD-2-Clause": 5,
+    "BSD-3-Clause": 14,
+    "MIT": 96
+  },
+  "nonempty_contract_addenda": 173,
+  "created_months": {
+    "2026-01": 16,
+    "2026-02": 19,
+    "2026-03": 26,
+    "2026-04": 29,
+    "2026-05": 29,
+    "2026-06": 40,
+    "2026-07": 34,
+    "2026-08": 9
+  }
+}

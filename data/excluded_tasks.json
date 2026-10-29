@@ -122,5 +122,25 @@
  {
   "instance_id": "zotonic__z_stdlib-118",
   "reason": "unfixed: no repaired version passed the post-evaluation audit"
+ },
+ {
+  "instance_id": "ryacub__rayniyomi-271",
+  "reason": "Principal hierarchy/depth feature and related contract requirements are not covered by the two global-sort tests; passing saved solutions can omit the principal feature.",
+  "exclusion_version": "longtail-swe-202-v1"
+ },
+ {
+  "instance_id": "apache__pekko-3325",
+  "reason": "The graded tests do not reject fabricated current-incarnation replay completion from an unrelated non-null controller before the first genuine reply.",
+  "exclusion_version": "longtail-swe-202-v1"
+ },
+ {
+  "instance_id": "neftedollar__fslangmcp-212",
+  "reason": "Contract/reference inconsistency: the reference permits an oversized first type despite the stated approximately 72k rendered ceiling.",
+  "exclusion_version": "longtail-swe-202-v1"
+ },
+ {
+  "instance_id": "canton-network__splice-3811",
+  "reason": "Contract/reference inconsistency: an exactly allocated multi-host party receives HTTP 500 from the reference despite the stated HTTP 200 and nonempty participant-ID contract.",
+  "exclusion_version": "longtail-swe-202-v1"
  }
 ]

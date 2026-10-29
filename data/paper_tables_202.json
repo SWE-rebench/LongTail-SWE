@@ -1,0 +1,105 @@
+{
+  "schema_version": "longtail-paper-table-aggregates-v1",
+  "task_types_and_difficulty": {
+    "tasks": 202,
+    "difficulty": {
+      "medium": 73,
+      "hard": 122,
+      "easy": 7
+    },
+    "categories": {
+      "major_bug": 55,
+      "core_feat": 136,
+      "minor_bug": 19,
+      "integration_feat": 25,
+      "ui_ux_feat": 11,
+      "dev_ops_enh": 9,
+      "critical_bug": 4,
+      "edge_case_bug": 20,
+      "performance_bug": 8,
+      "documentation_enh": 4,
+      "security_bug": 5,
+      "regression_bug": 1
+    },
+    "by_language": {
+      "Clojure": {
+        "medium": 3,
+        "hard": 10
+      },
+      "Dart": {
+        "hard": 10,
+        "easy": 1,
+        "medium": 3
+      },
+      "Elixir": {
+        "medium": 7,
+        "hard": 16
+      },
+      "Erlang": {
+        "hard": 6,
+        "easy": 2,
+        "medium": 4
+      },
+      "F#": {
+        "medium": 13,
+        "hard": 3
+      },
+      "Haskell": {
+        "hard": 8,
+        "medium": 5,
+        "easy": 1
+      },
+      "Julia": {
+        "hard": 21,
+        "medium": 6
+      },
+      "Kotlin": {
+        "hard": 11,
+        "medium": 1
+      },
+      "Lua": {
+        "hard": 4,
+        "medium": 8,
+        "easy": 1
+      },
+      "OCaml": {
+        "hard": 7,
+        "medium": 6
+      },
+      "R": {
+        "hard": 2,
+        "medium": 11,
+        "easy": 1
+      },
+      "Scala": {
+        "medium": 4,
+        "hard": 14
+      },
+      "Swift": {
+        "easy": 1,
+        "hard": 10,
+        "medium": 2
+      }
+    }
+  },
+  "funnel": {
+    "tasks": 202,
+    "original_v2_path": 68,
+    "final_A": 196,
+    "original_v2_path_final_A": 66,
+    "final_A_share_percent": 97.02970297029702,
+    "ratio_final_A_to_original_path_all": 2.8823529411764706,
+    "ratio_final_A_to_original_path_final_A": 2.9696969696969697,
+    "table_percentages_of_3261": {
+      "original_v2_path": 2.0852499233364,
+      "tasks": 6.19441888991107,
+      "original_v2_path_final_A": 2.02391904323827,
+      "final_A": 6.010426249616682
+    }
+  },
+  "old_206_reproduction": {
+    "task_types_and_difficulty": true,
+    "funnel_69_and_200": true
+  },
+  "denominator_note": "Old 200/69 = 2.8986 compared final-A annotations to all original-path tasks. Like-for-like final-A comparison is 200/67 = 2.9851. For 202 tasks these become 196/68 = 2.8824 and 196/66 = 2.9697 respectively. Name the denominator explicitly."
+}

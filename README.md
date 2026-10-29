@@ -1,13 +1,18 @@
 # Longtail-SWE: environments, evaluation, and solver–judge–repair prompts
 
 Minimal replication material for *Longtail-SWE: High Quality SWE Tasks for Underrepresented
-Languages* (206 benchmark tasks plus a 296-task easier companion set, 13 languages: Clojure, Dart, Elixir, Erlang, F#, Haskell, Julia,
+Languages* (**202 benchmark tasks** plus an unchanged 296-task easier companion set; 498 total, 13 languages: Clojure, Dart, Elixir, Erlang, F#, Haskell, Julia,
 Kotlin, Lua, OCaml, R, Scala, Swift).
 
 | Path | Content |
 | --- | --- |
-| `data/longtail_tasks.json` | The 206-task Longtail-SWE benchmark after the post-evaluation audit (statement, reference patch, test patch, F2P/P2P, install/test commands, log parser). |
-| `data/excluded_tasks.json` | The 31 tasks of the original 237-task set that the audit removed, with the reason. |
+| `data/longtail_tasks.json` | The 202-task release (statement, reference patch, test patch, F2P/P2P, install/test commands, log parser). Retained records are unchanged from the 206-task public dataset. |
+| `data/excluded_tasks.json` | The 35 cumulative exclusions from the original 237-task set, including four separately justified quarantines after the 206-task version. |
+| `data/release_manifest.json` | Version, task IDs, source lineage, per-record/content hashes, protocol hashes and unresolved limitations. |
+| `data/selected_results_202.jsonl`, `data/results_202.*` | The compact saved-result ledger (4,848 attempts) and overall/per-language aggregates. |
+| `data/annotations_202.json`, `data/paper_tables_202.json` | Historical per-task category/difficulty/funnel annotations, separately sourced by stage, and their 202-task aggregates. |
+| `configs/evaluation_runs.json` | Allowlisted observed model/settings for original and statement-rerun cohorts, without endpoints or credentials. |
+| `scripts/summarize_results.py` | Data-only ledger validation and result aggregation; no Docker or task execution. |
 | `data/longtail_easy_tasks.json` | The 296-task easier companion set, same format. |
 | `LICENSE`, `data/LICENSE.md`, `LICENSE-CC-BY-4.0.txt` | MIT for code; CC BY 4.0 for original dataset contributions; third-party materials keep their licenses. |
 | `base_images.yaml`, `base_dockerfiles/` | The 32 base images used by the two task sets plus the 5 intermediate images they are built from (37 build steps in total). |
@@ -95,14 +100,18 @@ and are left unchanged.
 image names, PR descriptions, PR authors, and annotation metadata were removed; `pr_url` is
 kept for provenance. `problem_statement` is the statement the solver sees. It equals
 `problem_statement_base` (the statement after the initial audit, possibly containing `[HIDDEN]` redactions of
-implementation hints) plus, for the tasks repaired with an addendum (177 of 206 in the benchmark, 244 of 296 in the easy set), the `### Additional contract requirements`
+implementation hints) plus, for the tasks repaired with an addendum (173 of 202 in the benchmark, 244 of 296 in the easy set), the `### Additional contract requirements`
 section whose text is `contract_addendum` (empty otherwise). `license` is the license of the source repository.
 
-## Post-evaluation audit (current version)
+## Release lineage and limitations
+
+This repository tracks **`longtail-swe-202-v1`**. GitHub, Hugging Face and the anonymous repository snapshot
+are deployed separately: updating this source repository does not establish that the other services serve
+the same revision. Historical releases and raw evidence remain unchanged.
 
 The benchmark first had 237 tasks (git tag `v1.0-237`). A post-evaluation audit (paper, Appendix "Post-evaluation
-audit and refinement") corrected the evaluator, checked every stored solver run, and repaired tests and statements.
-The current `data/longtail_tasks.json` keeps 206 tasks:
+audit and refinement") corrected the evaluator, checked stored solver runs, and repaired tests and statements.
+The previous 206-task version had the following historical grouping (not the composition of the current 202):
 
 | Group | Tasks |
 | --- | --- |
@@ -111,16 +120,65 @@ The current `data/longtail_tasks.json` keeps 206 tasks:
 | Repaired, audit pending, statement unchanged | 21 |
 | Repaired, audit pending, editorial statement change only | 8 |
 
-Removed (`data/excluded_tasks.json`): 19 tasks without an acceptable repair, 2 unsuitable tasks, and 10 tasks whose
-statement gained new requirements. For the repaired tasks, `test_patch`, `FAIL_TO_PASS`/`PASS_TO_PASS` (the tests that
+The first 31 exclusions were 19 tasks without an acceptable repair, 2 unsuitable tasks, and 10 tasks whose
+statement gained new requirements. The 202-task release additionally quarantines exactly these four tasks,
+for outcome-independent technical reasons; this does not repair or regrade them:
+
+| Task | Reason |
+| --- | --- |
+| `ryacub__rayniyomi-271` | The principal hierarchy feature is not graded by the two global-sort tests. |
+| `apache__pekko-3325` | Missing coverage for fabricated replay completion before the first genuine reply. |
+| `neftedollar__fslangmcp-212` | Contract/reference disagreement about an oversized first type and the rendered size ceiling. |
+| `canton-network__splice-3811` | Contract/reference disagreement for an exactly allocated multi-host party. |
+
+All retained public task records (including statements, reference patches, tests and commands) are unchanged.
+The 296-task easy companion is byte-identical. See `data/release_manifest.json` for hashes and the 35-exclusion lineage.
+The retained historical status counts are 177 `verified`, 24 `needs_manual_review`, and one `accepted_needs_audit`;
+these are **not fresh independent semantic certifications**. There are 26 unresolved task questions, including
+Riverpod's saved P2P evidence. The historical minimum-per-language construction target is not a guarantee
+for the filtered release; exact language/repository/addendum counts are in `data/composition_202.json`.
+
+For the historically repaired tasks, `test_patch`, `FAIL_TO_PASS`/`PASS_TO_PASS` (the tests that
 pass in two reference-patch runs), and in 22 tasks `test_cmd` changed. `scripts/eval.py` follows the corrected
 evaluator: solution patch, then restore of every test-patch path (renames included), then the test patch; a failed
 `git apply` is retried with `--ignore-whitespace`, and a solution patch that still does not apply is applied partially
 with `--reject` so the tests still run. The Dart parser also reads progress lines glued to unterminated test output.
 
+## Saved results and trajectories
+
+`data/selected_results_202.jsonl` retains the previously selected final206 primary attempts, filtered to 202
+IDs: eight models, three attempts per task, 4,848 outcomes. Of these, 768 are saved statement-rerun outcomes
+for the same 32 tasks across models; 4,080 use original/replayed saved outcomes. No new solver or task
+execution was performed for this projection. Qwen uses the already selected attempts and their linked
+trajectories; supplementary fresh/calibration attempts are not substituted, and independence from
+Qwen-based difficulty filtering is not established.
+
+Recompute the saved overall and per-language metrics without executing task code:
+
+```bash
+python3 scripts/summarize_results.py --output /tmp/longtail-results-202.csv
+```
+
+Pass@1 averages all 606 attempts per model; Pass@3 is the fraction of tasks solved in at least one of the
+three declared attempts; All-3 requires all three. SEM is computed across the three run-level success rates.
+`data/resources_202.json` reports saved harness counters, not newly measured or provider-standardized usage.
+
+The ledger preserves 192 initial-statement mismatches, 66 CRLF-only replay/candidate matches and 135 partial
+implementation applications. These are not copy failures and are not silently removed from the denominator.
+Unknown execution fields are `null`, not successful execution. The hashes of the local evaluator and parser
+are pinned, but full runtime equivalence with historical runs or reconstructed public images is not established.
+`configs/models.yaml` gives paper labels; `configs/evaluation_runs.json` records actual saved settings:
+DeepSeek's paper label is high but the saved request parameter is max; Qwen 3.6 statement reruns use 131,072
+context tokens rather than the original 262,144. Do not flatten these distinctions into one uniform configuration.
+
+A separate trajectory update is being prepared for
+[nebius/Longtail-SWE-trajectories](https://huggingface.co/datasets/nebius/Longtail-SWE-trajectories),
+using this exact ledger and linked raw-trajectory/patch hashes, including Sol. This README does not claim
+that the public Hub revision already serves this candidate. Raw internal evidence is not a sanitized public export.
+
 ## Relation to the paper
 
-This repository contains the 206-task Longtail-SWE benchmark, its executable environments, the evaluation
+This repository contains the 202-task Longtail-SWE release, its executable environments, the evaluation
 protocol, and the prompts, schemas, and settings of the auditor, solver, judge, and repairer. The paper's
 supplementary archive additionally contains material that is **not** part of this repository: the raw issue texts and original tests, agent trajectories, audit and repair histories (the
 intermediate task revisions), and the data-collection code. The scaffold that executes the agents and the repair
