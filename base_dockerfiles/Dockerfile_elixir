@@ -1,0 +1,57 @@
+# Elixir build container
+# Stable Elixir + Erlang on Debian with common native deps
+
+FROM --platform=linux/amd64 elixir:1.18.4-otp-27
+
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Etc/UTC \
+    LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8 \
+    ELIXIR_ERL_OPTIONS=+fnu
+
+# Base tools + native libs many Elixir/Erlang NIFs depend on
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    curl \
+    wget \
+    unzip \
+    zip \
+    ca-certificates \
+    build-essential \
+    pkg-config \
+    cmake \
+    gnupg \
+    inotify-tools \
+    nodejs \
+    npm \
+    python3 \
+    python3-pip \
+    python3-venv \
+    rustc \
+    cargo \
+    libssl-dev \
+    zlib1g-dev \
+    libgmp-dev \
+    libffi-dev \
+ && rm -rf /var/lib/apt/lists/*
+
+# Keep caches inside /workspace so they’re writable even for non-root
+ENV MIX_HOME=/workspace/.mix \
+    HEX_HOME=/workspace/.hex \
+    REBAR_CACHE_DIR=/workspace/.cache/rebar3 \
+    XDG_CACHE_HOME=/workspace/.cache \
+    XDG_CONFIG_HOME=/workspace/.config \
+    XDG_DATA_HOME=/workspace/.local/share
+
+# Pre-install Hex and Rebar locally (uses MIX_HOME/HEX_HOME above)
+RUN mkdir -p /workspace \
+ && mix local.hex --force \
+ && mix local.rebar --force \
+ && chmod -R 777 /workspace
+
+# Create a non-root user (uncomment USER line below to use it)
+RUN adduser --disabled-password --gecos 'dog' nonroot
+# USER nonroot
+
+# Working directory for your Elixir projects
+WORKDIR /workspace

@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use Longtail-SWE, please cite the paper below."
+type: software
+title: "Longtail-SWE"
+authors:
+  - family-names: Dobrovolskii
+    given-names: Vladimir
+  - family-names: Badertdinov
+    given-names: Ibragim
+  - family-names: Golubev
+    given-names: Alexander
+repository-code: "https://github.com/SWE-rebench/LongTail-SWE"
+url: "https://arxiv.org/abs/2611.10304"
+license: MIT
+preferred-citation:
+  type: article
+  title: "Longtail-SWE: High-Quality SWE Tasks for Underrepresented Languages"
+  authors:
+    - family-names: Dobrovolskii
+      given-names: Vladimir
+    - family-names: Badertdinov
+      given-names: Ibragim
+    - family-names: Golubev
+      given-names: Alexander
+  year: 2026
+  journal: "arXiv preprint"
+  identifiers:
+    - type: other
+      value: "arXiv:2611.10304"
+      description: "arXiv eprint (cs.SE)"
+  url: "https://arxiv.org/abs/2611.10304"

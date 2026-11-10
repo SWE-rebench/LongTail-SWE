@@ -1,0 +1,22 @@
+# Versioned Erlang audit/validation base.  The parent was registry-verified by
+# the completed Elixir run and already supplies OTP 27, build tooling, Python,
+# Node, C/C++ toolchains, and writable shared cache locations.
+FROM elixir_base:v2026-07-02-elixir-1.18.4-otp27-rebench
+
+USER root
+
+# The verified parent already contains OTP 27, EUnit, Common Test, and
+# rebar3. Do not install Debian's OTP 25 packages over that toolchain.
+RUN test "$(erl -noshell -eval 'io:format("~s", [erlang:system_info(otp_release)]), halt().')" = "27" \
+ && erl -noshell -eval 'code:lib_dir(eunit), code:lib_dir(common_test), halt().' \
+ && rebar3 --version \
+ && if ! getent passwd nonroot >/dev/null; then useradd --create-home --uid 1000 --shell /bin/bash nonroot; fi \
+ && mkdir -p /workspace/.cache/rebar3 /workspace/.cache/erl \
+ && chmod -R 777 /workspace
+
+ENV REBAR_CACHE_DIR=/workspace/.cache/rebar3 \
+    XDG_CACHE_HOME=/workspace/.cache \
+    XDG_CONFIG_HOME=/workspace/.config \
+    XDG_DATA_HOME=/workspace/.local/share
+
+WORKDIR /workspace

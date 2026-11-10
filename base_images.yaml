@@ -1,0 +1,234 @@
+# Base images referenced by data/longtail_tasks.json and data/longtail_easy_tasks.json
+# (install_config.base_image_name).
+#
+# Every entry is built locally as `<tag>` (no registry prefix); `parent` entries are
+# built first. `scripts/build_base_images.py` reads this file.
+#
+# provenance:
+#   exact         Dockerfile (and build args) are the ones used for the published image.
+#   reconstructed Published image was not built from a file available to us; the Dockerfile
+#                 is reconstructed from the recorded image configuration / build procedure.
+#   alias         Same image content as another entry (plain retag).
+#   pull          Upstream image retagged without modification.
+# role: task (used by >=1 task) | parent (intermediate build stage).
+images:
+  - tag: clojure_base:v2026-07-02-clojure-rebench
+    dockerfile: Dockerfile_clojure
+    language: Clojure
+    role: task
+    provenance: exact
+  - tag: dart_base:v2026-07-02-dart-rebench
+    dockerfile: Dockerfile_dart
+    language: Dart
+    role: task
+    provenance: exact
+  - tag: elixir_base:v2026-07-02-elixir-1.18.4-otp27-rebench
+    dockerfile: Dockerfile_elixir
+    language: Elixir
+    role: task
+    provenance: exact
+  - tag: elixir_base:v2026-08-14-elixir-1.18.4-otp27-postgres18-rebench
+    dockerfile: Dockerfile_elixir_postgres18
+    language: Elixir
+    role: parent
+    provenance: exact
+  - tag: elixir_base:v2026-08-16-elixir-1.18.4-otp27-postgres18-evcache15-rebench
+    dockerfile: Dockerfile_elixir_postgres18_evcache
+    parent: elixir_base:v2026-08-14-elixir-1.18.4-otp27-postgres18-rebench
+    language: Elixir
+    role: task
+    provenance: exact
+  - tag: erlang_base:v2026-08-18-erlang-otp27-rebench
+    dockerfile: Dockerfile_erlang_otp27
+    parent: elixir_base:v2026-07-02-elixir-1.18.4-otp27-rebench
+    language: Erlang
+    role: task
+    provenance: exact
+  - tag: elixir_base:v2026-08-14-elixir-1.18.4-otp27-node24-rebench
+    dockerfile: Dockerfile_elixir_node24
+    language: Elixir
+    role: task
+    provenance: exact
+  - tag: elixir_base:v2026-08-14-elixir-1.19.4-otp28-rust1.85-postgres16-rebench
+    dockerfile: Dockerfile_elixir_rust185_postgres16
+    language: Elixir
+    role: task
+    provenance: exact
+  - tag: erlang_base:v2026-08-18-erlang-otp27-python3dev-rebench
+    dockerfile: Dockerfile_erlang_otp27_python3dev
+    parent: erlang_base:v2026-08-18-erlang-otp27-rebench
+    language: Erlang
+    role: task
+    provenance: exact
+  - tag: erlang_base:v2026-08-18-erlang-otp28-rebench
+    dockerfile: Dockerfile_erlang_otp28
+    parent: elixir_base:v2026-07-02-elixir-1.18.4-otp27-rebench
+    language: Erlang
+    role: task
+    provenance: exact
+  - tag: erlang_base:v2026-08-20-e27-rmqsts-bdf98c8-r3
+    dockerfile: Dockerfile_erlang_rmq_framework
+    parent: erlang_base:v2026-08-18-erlang-otp27-rebench
+    build_args: {RMQ_SERVER_SHA: bdf98c889590c618311b7095b1ab5788ce8aaea5}
+    language: Erlang
+    role: parent
+    provenance: exact
+  - tag: erlang_base:v2026-08-20-e27-rmqsts-bdf98c8-r4deps205
+    dockerfile: Dockerfile_erlang_rmq_deps205
+    parent: erlang_base:v2026-08-20-e27-rmqsts-bdf98c8-r3
+    language: Erlang
+    role: parent
+    provenance: reconstructed
+  - tag: erlang_base:v2026-08-20-e27-rmqsts-bdf98c8-r5rootmk
+    dockerfile: Dockerfile_erlang_rmq_root_links
+    parent: erlang_base:v2026-08-20-e27-rmqsts-bdf98c8-r4deps205
+    language: Erlang
+    role: task
+    provenance: exact
+  - tag: fsharp_base:v2026-08-17-dotnet-sdk-8-rebench
+    dockerfile: Dockerfile_fsharp
+    language: F#
+    role: task
+    provenance: exact
+  - tag: fsharp_dotnet10_base:v2026-08-18-sdk10-rebench
+    dockerfile: Dockerfile_fsharp_dotnet10
+    build_args: {DOTNET_SDK_VERSION: "10.0"}
+    language: F#
+    role: task
+    provenance: exact
+  - tag: fsharp_sdk10105_base:v2026-08-18-sdk10105-rebench
+    dockerfile: Dockerfile_fsharp_dotnet10
+    build_args:
+      DOTNET_SDK_VERSION: "10.0"
+      DOTNET_SDK_TARBALL_URL: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/10.0.105/dotnet-sdk-10.0.105-linux-x64.tar.gz
+    language: F#
+    role: task
+    provenance: exact
+  - tag: fsharp_sdk10302_base:v2026-08-18-sdk10302-rebench
+    dockerfile: Dockerfile_fsharp_dotnet10
+    build_args:
+      DOTNET_SDK_VERSION: "10.0"
+      DOTNET_SDK_TARBALL_URL: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/10.0.302/dotnet-sdk-10.0.302-linux-x64.tar.gz
+    language: F#
+    role: task
+    provenance: reconstructed
+    note: Exact SDK installed from the official tarball on top of the SDK 10.0 image; the base tag used originally was not recorded.
+  - tag: fsharp_sdk90101_base:v2026-08-18-sdk90101-rebench
+    dockerfile: Dockerfile_fsharp_dotnet10
+    build_args:
+      DOTNET_SDK_VERSION: "10.0"
+      DOTNET_SDK_TARBALL_URL: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/9.0.101/dotnet-sdk-9.0.101-linux-x64.tar.gz
+    language: F#
+    role: task
+    provenance: reconstructed
+    note: Exact SDK installed from the official tarball on top of the SDK 10.0 image; the base tag used originally was not recorded.
+  - tag: haskell_base:v2026-08-16-bookworm-ghc-9.8.4-audit-deps-r1
+    dockerfile: Dockerfile_haskell
+    build_args:
+      GHC_VERSION: 9.8.4
+      GHC_BINDIST_PLATFORM: deb12
+      GHC_BINDIST_SHA256: b50545b54934068a569225e3dde267a8b5aab66449330d63e02a8cf28972375e
+    language: Haskell
+    role: task
+    provenance: exact
+  - tag: haskell_base:v2026-08-16-bookworm-ghc-9.12.2-audit-deps-r1
+    dockerfile: Dockerfile_haskell
+    build_args:
+      GHC_VERSION: 9.12.2
+      GHC_BINDIST_PLATFORM: deb12
+      GHC_BINDIST_SHA256: 447ec2fcc773ae9ebc3f39766c719641631274f9b765d7426a8cbe9241677c9f
+    language: Haskell
+    role: task
+    provenance: exact
+  - tag: julia_base:v2026-07-31-julia-1.12.6-rebench-py
+    dockerfile: Dockerfile_julia
+    language: Julia
+    role: task
+    provenance: exact
+  - tag: kotlin-jdk-21:v2026-06-29-kotlin-rebench
+    dockerfile: Dockerfile_kotlin
+    language: Kotlin
+    role: task
+    provenance: reconstructed
+    note: Published image has Temurin JDK 21.0.8 + SDKMAN Kotlin/Gradle; Dockerfile_kotlin pins the JDK 21 line.
+  - tag: kotlin-jdk-21:v2026-08-16-kotlin-android-browser-jdk17-node22-native-rebench
+    dockerfile: Dockerfile_kotlin_android_browser
+    parent: dart_base:v2026-07-02-dart-rebench
+    language: Kotlin
+    role: task
+    provenance: exact
+  - tag: kotlin-jdk-21:v2026-08-16-kotlin-jdk21-jdk25-toolchains-rebench
+    alias_of: scala_base:v2026-08-14-remediation-jdk21-jdk25-node22-rust184-postgres
+    language: Kotlin
+    role: task
+    provenance: alias
+  - tag: lua_base:minimal
+    dockerfile: Dockerfile_lua_minimal
+    language: Lua
+    role: parent
+    provenance: reconstructed
+  - tag: lua_base:v2026-06-27-lua-rebench
+    dockerfile: Dockerfile_lua
+    parent: lua_base:minimal
+    language: Lua
+    role: task
+    provenance: reconstructed
+    note: Dockerfile_lua overlays the Neovim/test tooling on the minimal Lua image.
+  - tag: ocaml_base:v2026-08-14-ocaml-5.5.0-node22-protobuf-dev-rebench
+    dockerfile: Dockerfile_ocaml
+    language: OCaml
+    role: task
+    provenance: exact
+  - tag: ocaml_base:v2026-08-16-ocaml-5.4.1-node22-protobuf-dev-rebench-r1
+    dockerfile: Dockerfile_ocaml
+    build_args: {OCAML_VERSION: 5.4.1, DUNE_VERSION: 3.24.1}
+    language: OCaml
+    role: task
+    provenance: exact
+  - tag: ocaml_base:v2026-08-17-ocaml-5.4.1-protoc-wrapper-r1
+    dockerfile: Dockerfile_ocaml_protoc_wrapper
+    parent: ocaml_base:v2026-08-16-ocaml-5.4.1-node22-protobuf-dev-rebench-r1
+    build_args:
+      BASE_IMAGE: ocaml_base:v2026-08-16-ocaml-5.4.1-node22-protobuf-dev-rebench-r1
+      TARGET_OCAML_VERSION: 5.4.1
+      CREATE_OCAML_SWITCH: "0"
+    language: OCaml
+    role: task
+    provenance: exact
+  - tag: r_base:v2026-07-01-r-rebench
+    dockerfile: Dockerfile_r
+    language: R
+    role: task
+    provenance: exact
+  - tag: r_geospatial:v2026-08-17-rocker-4.4.1
+    dockerfile: Dockerfile_r_geospatial
+    language: R
+    role: task
+    provenance: pull
+  - tag: scala_base:v2026-06-29-scala-rebench
+    dockerfile: Dockerfile_scala
+    language: Scala
+    role: parent
+    provenance: reconstructed
+  - tag: scala_base:v2026-08-14-remediation-jdk21-jdk25-node22-rust184-postgres
+    dockerfile: Dockerfile_scala_remediation
+    parent: scala_base:v2026-06-29-scala-rebench
+    language: Scala
+    role: task
+    provenance: exact
+  - tag: swift_base:v2026-07-02-swift-6.2-rebench
+    dockerfile: Dockerfile_swift
+    language: Swift
+    role: task
+    provenance: exact
+  - tag: swift_base:v2026-08-16-swift-6.4-noble-native-reaudit
+    dockerfile: Dockerfile_swift_6.4_noble
+    language: Swift
+    role: task
+    provenance: exact
+  - tag: swift_base:v2026-08-17-swift-6.2-clang17-reaudit
+    dockerfile: Dockerfile_swift_clang17
+    parent: swift_base:v2026-07-02-swift-6.2-rebench
+    language: Swift
+    role: task
+    provenance: exact

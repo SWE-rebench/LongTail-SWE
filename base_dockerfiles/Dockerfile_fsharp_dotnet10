@@ -1,0 +1,71 @@
+# Versioned F# audit and execution-validation image. The build launcher passes
+# an exact supported SDK version and publishes a distinct registry tag/digest
+# for each evidenced target-framework cohort.
+ARG DOTNET_SDK_REPOSITORY=mcr.microsoft.com/dotnet/sdk
+ARG DOTNET_SDK_VERSION=10.0
+ARG DOTNET_SDK_TARBALL_URL=
+FROM --platform=linux/amd64 ${DOTNET_SDK_REPOSITORY}:${DOTNET_SDK_VERSION}
+
+ARG DOTNET_SDK_TARBALL_URL
+
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Etc/UTC \
+    DOTNET_CLI_HOME=/workspace/.dotnet \
+    DOTNET_CLI_TELEMETRY_OPTOUT=1 \
+    DOTNET_NOLOGO=1 \
+    DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1 \
+    NUGET_PACKAGES=/workspace/.nuget/packages \
+    XDG_CACHE_HOME=/workspace/.cache \
+    XDG_CONFIG_HOME=/workspace/.config \
+    XDG_DATA_HOME=/workspace/.local/share
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    bash \
+    build-essential \
+    ca-certificates \
+    clang \
+    cmake \
+    curl \
+    file \
+    git \
+    gnupg \
+    jq \
+    libgdiplus \
+    libicu-dev \
+    libpq-dev \
+    libssl-dev \
+    nodejs \
+    npm \
+    pkg-config \
+    python3 \
+    python3-pip \
+    python3-venv \
+    ripgrep \
+    unzip \
+    wget \
+    zip \
+    zlib1g-dev \
+ && rm -rf /var/lib/apt/lists/*
+
+# The agent execution image resets PATH and otherwise selects the SDK
+# inherited from the MCR layer.  Exact cohorts also expose their SDK from the
+# standard /usr/local/bin path to preserve the selected host under that reset.
+RUN if [ -n "$DOTNET_SDK_TARBALL_URL" ]; then \
+      mkdir -p /opt/dotnet \
+      && curl --fail --location --retry 5 --retry-all-errors "$DOTNET_SDK_TARBALL_URL" -o /tmp/dotnet-sdk.tar.gz \
+      && tar -xzf /tmp/dotnet-sdk.tar.gz -C /opt/dotnet \
+      && rm /tmp/dotnet-sdk.tar.gz \
+      && ln -sfn /opt/dotnet/dotnet /usr/local/bin/dotnet; \
+    else \
+      ln -s /usr/share/dotnet /opt/dotnet; \
+    fi \
+ && test -x /opt/dotnet/dotnet \
+ && adduser --disabled-password --gecos '' nonroot \
+ && mkdir -p /workspace/.dotnet /workspace/.nuget/packages /workspace/.cache \
+ && chown -R nonroot:nonroot /workspace \
+ && git config --system --add safe.directory '*'
+
+ENV DOTNET_ROOT=/opt/dotnet
+ENV PATH=/opt/dotnet:${PATH}
+
+WORKDIR /workspace

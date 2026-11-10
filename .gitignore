@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.env
+.env.*
+
+# Outputs of the scripts
+dockerfiles/
+logs/
+eval_report.json

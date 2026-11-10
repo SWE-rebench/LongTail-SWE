@@ -1,0 +1,12 @@
+# Narrow Python-development cohort for ActorForth's Erlang/Python hook.
+FROM erlang_base:v2026-08-18-erlang-otp27-rebench
+
+USER root
+
+RUN apt-get update \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends python3-dev \
+ && rm -rf /var/lib/apt/lists/* \
+ && python3-config --includes \
+ && test -f "$(python3 -c 'import sysconfig; print(sysconfig.get_path("include"))')/Python.h"
+
+WORKDIR /workspace

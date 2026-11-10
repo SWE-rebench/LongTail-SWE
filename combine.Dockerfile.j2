@@ -1,0 +1,25 @@
+{% set project_dir = "/{}".format(spec.repo.split("/")[1]) %}
+{% set base_image = spec.install_config.base_image_name %}
+{% if base_image_registry %}
+{% set base_image = base_image_registry ~ "/" ~ base_image %}
+{% endif %}
+FROM --platform=linux/amd64 {{ base_image }} AS base
+FROM --platform=linux/amd64 base AS instance
+
+RUN <<-DOCKER_RUN_EOF
+    set -eux;
+    git clone -o origin https://github.com/{{ spec.repo }} {{ project_dir }};
+    chmod -R 777 {{ project_dir }};
+    cd {{ project_dir }};
+    git reset --hard {{ spec.base_commit }};
+    git remote remove origin;
+    {%- for cmd in spec.install_config.install %}
+    cat > /tmp/install_{{ loop.index }}.sh <<'INSTALL_CMD_{{ loop.index }}'
+{{ cmd }}
+INSTALL_CMD_{{ loop.index }}
+    sh -ux /tmp/install_{{ loop.index }}.sh || true;
+    rm -f /tmp/install_{{ loop.index }}.sh;
+    {%- endfor %}
+DOCKER_RUN_EOF
+
+WORKDIR {{ project_dir }}

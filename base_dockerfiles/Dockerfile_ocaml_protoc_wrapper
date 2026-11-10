@@ -1,0 +1,55 @@
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
+
+ARG TARGET_OCAML_VERSION
+ARG CREATE_OCAML_SWITCH=0
+ARG PREINSTALL_Z3_VERSION=
+
+ENV OPAMSWITCH=${TARGET_OCAML_VERSION} \
+    PATH=/opt/opam/${TARGET_OCAML_VERSION}/bin:/opt/cargo/bin:/usr/local/go/bin:/usr/lib/postgresql/15/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
+    CAML_LD_LIBRARY_PATH=/opt/opam/${TARGET_OCAML_VERSION}/lib/stublibs:/opt/opam/${TARGET_OCAML_VERSION}/lib/ocaml/stublibs:/opt/opam/${TARGET_OCAML_VERSION}/lib/ocaml \
+    OCAML_TOPLEVEL_PATH=/opt/opam/${TARGET_OCAML_VERSION}/lib/toplevel
+
+USER root
+
+# The audit action server is a PyInstaller binary and can leave an extracted
+# C++ runtime on LD_LIBRARY_PATH.  Debian's protoc must never inherit that
+# private runtime.  Keep the distro binary and make the absolute /usr/bin path
+# itself robust, because audit instructions intentionally name that path.
+RUN set -eux; \
+    install -d -m 0755 /usr/lib/rebench-system-tools; \
+    mv /usr/bin/protoc /usr/lib/rebench-system-tools/protoc.real; \
+    printf '%s\n' \
+      '#!/bin/sh' \
+      'unset LD_LIBRARY_PATH' \
+      'exec /usr/lib/rebench-system-tools/protoc.real "$@"' \
+      > /usr/bin/protoc; \
+    chmod 0755 /usr/bin/protoc
+
+RUN set -eux; \
+    if [ "${CREATE_OCAML_SWITCH}" = "1" ]; then \
+      opam switch create "${TARGET_OCAML_VERSION}" \
+        "ocaml-base-compiler.${TARGET_OCAML_VERSION}" --yes; \
+      opam install --switch "${TARGET_OCAML_VERSION}" --yes dune.3.24.1 ocamlfind; \
+    fi; \
+    if [ -n "${PREINSTALL_Z3_VERSION}" ]; then \
+      opam install --switch "${TARGET_OCAML_VERSION}" --yes \
+        "z3.${PREINSTALL_Z3_VERSION}"; \
+    fi; \
+    chown -R nonroot:nonroot /opt/opam
+
+RUN set -eux; \
+    test "$(ocamlc -version)" = "${TARGET_OCAML_VERSION}"; \
+    test "$(dune --version)" = "3.24.1"; \
+    poison_dir="$(mktemp -d)"; \
+    printf 'not a shared object\n' > "${poison_dir}/libstdc++.so.6"; \
+    LD_LIBRARY_PATH="${poison_dir}" /usr/bin/protoc --version; \
+    rm -rf "${poison_dir}"; \
+    pkg-config --exists protobuf; \
+    test -f /usr/include/google/protobuf/message.h; \
+    if [ -n "${PREINSTALL_Z3_VERSION}" ]; then \
+      test "$(z3 -version | awk '{print $3}')" = "${PREINSTALL_Z3_VERSION}"; \
+      ocamlfind query z3; \
+    fi
+
+WORKDIR /workspace

@@ -1,0 +1,27 @@
+# Narrow re-audit baseline for Swift dependency/toolchain failures.
+# The amd64 Swift 6.4 development snapshot is pinned to make this rerun reproducible.
+FROM --platform=linux/amd64 docker.io/swiftlang/swift@sha256:1210ae2c0127b27b284e3f93a16726c4a8a99c5382b27dae5d1a26d50f2973f9
+
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Etc/UTC \
+    XDG_CACHE_HOME=/workspace/.cache \
+    XDG_CONFIG_HOME=/workspace/.config \
+    XDG_DATA_HOME=/workspace/.local/share \
+    HOME=/workspace
+
+# Preserve the original Swift base's common packages, move to Noble/glibc >= 2.39,
+# and add the development libraries implicated by the five environment re-audits.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git curl wget unzip zip ca-certificates \
+    build-essential pkg-config cmake ninja-build clang \
+    python3 python3-pip python3-venv \
+    libssl-dev libsqlite3-dev libjemalloc-dev zlib1g-dev libicu-dev \
+    libxml2-dev libcurl4-openssl-dev libbsd-dev liblzma-dev \
+    liblapack-dev liblapacke-dev libopenblas-dev \
+    libgd-dev libexif-dev libiptcdata0-dev tzdata \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /workspace && chmod 0777 /workspace \
+ && adduser --disabled-password --gecos 'dog' nonroot
+
+WORKDIR /workspace

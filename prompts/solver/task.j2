@@ -1,0 +1,24 @@
+# ISSUE DESCRIPTION
+
+{{ issue_description }}
+
+# ADDITIONAL ADVICE
+
+Since you are given a git repository, you can use git commands to simplify your work.
+For example, if you made a mistake and want to revert your changes, you can use `git checkout <file>` to restore the file to its original state.
+You can also reset all changes in the repository using `git reset --hard` command.
+Additionally, you can use `git stash` and `git stash pop` to temporarily save your changes and restore them later.
+Finally, you can see the changes that you've made (which form your final answer) using `git status` or `git diff` commands.
+You don't need to use `git add` or `git commit` before finishing: your changes are taken from the diff of the working tree.
+
+# CHECKLIST
+
+Before submitting your solution, please go over the following checklist and make sure you've done everything:
+- [ ] If an error was reported in the issue description, I have successfully reproduced it.
+- [ ] If an error was reported in the issue description, I have confirmed that my fix resolves the error.
+- [ ] I have thought about edge cases and made sure my fix handles them as well.
+- [ ] I have run existing tests in the repository that might have been affected by the change I made and confirmed that they pass.
+- [ ] I did not perform or attempt any prohibited benchmark-integrity action, including accessing task-specific external source, post-base solution code, or non-local tests.
+I want you to list every bullet from this checklist and write your reasoning for why you think you did it or didn't need to.
+
+Repository has been uploaded and your shell is currently at the repository root. Time to solve the issue!

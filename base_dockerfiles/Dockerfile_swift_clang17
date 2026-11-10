@@ -1,0 +1,13 @@
+FROM --platform=linux/amd64 swift_base:v2026-07-02-swift-6.2-rebench
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends ca-certificates curl gnupg \
+ && curl -fsSL https://apt.llvm.org/llvm-snapshot.gpg.key -o /tmp/llvm-snapshot.gpg.key \
+ && echo "8b2a587ffd672c4687e7581dad4b2f6c1bb2ad6b480cd9771ba2ff48e0b8c75d  /tmp/llvm-snapshot.gpg.key" | sha256sum -c - \
+ && gpg --batch --dearmor -o /usr/share/keyrings/apt.llvm.org.gpg /tmp/llvm-snapshot.gpg.key \
+ && echo "deb [signed-by=/usr/share/keyrings/apt.llvm.org.gpg] https://apt.llvm.org/jammy/ llvm-toolchain-jammy-17 main" > /etc/apt/sources.list.d/llvm-17.list \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends clang-17 lld-17 \
+ && rm -rf /var/lib/apt/lists/* /tmp/llvm-snapshot.gpg.key

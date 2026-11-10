@@ -1,0 +1,157 @@
+{
+  "base_image": "elixir_base:v2026-08-16-elixir-1.18.4-otp27-postgres18-evcache15-rebench",
+  "rows": [
+    {
+      "instance_id": "agentjido__req_llm-902",
+      "repo": "agentjido/req_llm",
+      "base_commit": "c7036761aad967590b0bfc39ed6285142286e5cd",
+      "paths": [
+        "."
+      ],
+      "npm_path": null,
+      "prefetch_pr_341": false
+    },
+    {
+      "instance_id": "agentjido__req_llm-908",
+      "repo": "agentjido/req_llm",
+      "base_commit": "2cce4deb4ee0b41d27e8281684c06a7ba2b65246",
+      "paths": [
+        "."
+      ],
+      "npm_path": null,
+      "prefetch_pr_341": false
+    },
+    {
+      "instance_id": "andreasronge__ptc_runner-532",
+      "repo": "andreasronge/ptc_runner",
+      "base_commit": "6516cfa7925447db86e836ee0d59733f21a7d047",
+      "paths": [
+        "."
+      ],
+      "npm_path": null,
+      "prefetch_pr_341": false
+    },
+    {
+      "instance_id": "andreasronge__ptc_runner-652",
+      "repo": "andreasronge/ptc_runner",
+      "base_commit": "cb52e8f84144494f3b38f3f6920bf993a43c7e86",
+      "paths": [
+        "."
+      ],
+      "npm_path": null,
+      "prefetch_pr_341": false
+    },
+    {
+      "instance_id": "bartblast__hologram-905",
+      "repo": "bartblast/hologram",
+      "base_commit": "591368e955beb3a4aa731898069ae58a75a7def6",
+      "paths": [
+        "."
+      ],
+      "npm_path": "assets",
+      "prefetch_pr_341": false
+    },
+    {
+      "instance_id": "canada-ca__navigator-102",
+      "repo": "canada-ca/navigator",
+      "base_commit": "f057714da4dcb9d725c3ada2c875966c80431a46",
+      "paths": [
+        "valentine"
+      ],
+      "npm_path": null,
+      "prefetch_pr_341": false
+    },
+    {
+      "instance_id": "canada-ca__navigator-122",
+      "repo": "canada-ca/navigator",
+      "base_commit": "5942835fde594ddd4385f4a894707bbd2052ee78",
+      "paths": [
+        "valentine"
+      ],
+      "npm_path": null,
+      "prefetch_pr_341": false
+    },
+    {
+      "instance_id": "dark-trench__squidie-365",
+      "repo": "dark-trench/squidie",
+      "base_commit": "9fb50d175013418e50c4ef25ec259490277e86cf",
+      "paths": [
+        "."
+      ],
+      "npm_path": null,
+      "prefetch_pr_341": false
+    },
+    {
+      "instance_id": "doofinder__llm_composer-77",
+      "repo": "doofinder/llm_composer",
+      "base_commit": "51bd5f97dba6ca15771507d9823bf84aa9ed9239",
+      "paths": [
+        "."
+      ],
+      "npm_path": null,
+      "prefetch_pr_341": false
+    },
+    {
+      "instance_id": "expert-lsp__expert-454",
+      "repo": "expert-lsp/expert",
+      "base_commit": "c003eba58d2ef60121b29c8d05071156f520ec7d",
+      "paths": [
+        "apps/expert",
+        "apps/forge",
+        "apps/engine"
+      ],
+      "npm_path": null,
+      "prefetch_pr_341": false
+    },
+    {
+      "instance_id": "huddlz-hq__cucumber-44",
+      "repo": "huddlz-hq/cucumber",
+      "base_commit": "1ae65746bc891ca01741a8c9c32e6b1b10219315",
+      "paths": [
+        "."
+      ],
+      "npm_path": null,
+      "prefetch_pr_341": false
+    },
+    {
+      "instance_id": "jvoegele__bond-39",
+      "repo": "jvoegele/bond",
+      "base_commit": "b89e6b6ae717e5713666fbfe2367df6fd317fa30",
+      "paths": [
+        "."
+      ],
+      "npm_path": null,
+      "prefetch_pr_341": false
+    },
+    {
+      "instance_id": "pass-agent__loomkin-118",
+      "repo": "pass-agent/loomkin",
+      "base_commit": "139ad5953e320c7a7b44e1df12282ed586a2f0df",
+      "paths": [
+        "."
+      ],
+      "npm_path": null,
+      "prefetch_pr_341": false
+    },
+    {
+      "instance_id": "pass-agent__loomkin-76",
+      "repo": "pass-agent/loomkin",
+      "base_commit": "986e8a1684096980cf9d19d7e5e348179b3c79b5",
+      "paths": [
+        "."
+      ],
+      "npm_path": null,
+      "prefetch_pr_341": false
+    },
+    {
+      "instance_id": "sneako__finch-341",
+      "repo": "sneako/finch",
+      "base_commit": "358620e9d73cabbe450674c865a6fe3c4ed1361a",
+      "paths": [
+        "."
+      ],
+      "npm_path": null,
+      "prefetch_pr_341": true
+    }
+  ]
+}
