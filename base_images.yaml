@@ -54,12 +54,6 @@ images:
     language: Elixir
     role: task
     provenance: exact
-  - tag: erlang_base:v2026-08-19-erlang-otp27-gperf-3-1-rebench
-    dockerfile: Dockerfile_erlang_otp27_gperf
-    parent: erlang_base:v2026-08-18-erlang-otp27-rebench
-    language: Erlang
-    role: task
-    provenance: exact
   - tag: erlang_base:v2026-08-18-erlang-otp27-python3dev-rebench
     dockerfile: Dockerfile_erlang_otp27_python3dev
     parent: erlang_base:v2026-08-18-erlang-otp27-rebench

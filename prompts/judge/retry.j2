@@ -1,5 +1,0 @@
-{% include "judge/task.j2" %}
-
-# Verdict extraction retry
-
-This is targeted judge extraction attempt {{ judge_attempt_index }} of {{ max_judge_extraction_retries }}. The prior attempt's exact extraction or schema error is recorded in `{{ failure_path }}`. {% if trajectory_path is not none %}The rejected trajectory is `{{ trajectory_path }}`.{% else %}No readable trajectory was produced.{% endif %} Read that evidence before auditing again. Produce a new `verdict.json` that strictly matches the exact schema above. This retry does not change the task revision and successfully parsed verdicts for other instances are retained.
