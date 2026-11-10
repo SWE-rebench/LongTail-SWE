@@ -142,5 +142,113 @@
   "instance_id": "canton-network__splice-3811",
   "reason": "Contract/reference inconsistency: an exactly allocated multi-host party receives HTTP 500 from the reference despite the stated HTTP 200 and nonempty participant-ID contract.",
   "exclusion_version": "longtail-swe-202-v1"
+ },
+ {
+  "instance_id": "absaoss__pramen-717",
+  "reason": "easy companion set, v1.1: Hidden tests grade some solutions wrongly and no repair passed validation."
+ },
+ {
+  "instance_id": "android__nowinandroid-2055",
+  "reason": "easy companion set, v1.1: Reference patch does not compile in the environment (Spotless Gradle plugin unavailable to build-logic)."
+ },
+ {
+  "instance_id": "atomvm__atomvm-2253",
+  "reason": "easy companion set, v1.1: Hidden tests reject a reasonable solution: they require behaviour the statement does not specify."
+ },
+ {
+  "instance_id": "babashka__cli-189",
+  "reason": "easy companion set, v1.1: Hidden tests reject a reasonable solution: they require behaviour the statement does not specify."
+ },
+ {
+  "instance_id": "birdnet-team__birdnet-live-app-41",
+  "reason": "easy companion set, v1.1: Hidden tests grade some solutions wrongly and no repair passed validation."
+ },
+ {
+  "instance_id": "databrickslabs__brickster-247",
+  "reason": "easy companion set, v1.1: Hidden tests reject a reasonable solution: they require behaviour the statement does not specify."
+ },
+ {
+  "instance_id": "evovest__evotrees.jl-327",
+  "reason": "easy companion set, v1.1: Hidden tests grade some solutions wrongly and no repair passed validation."
+ },
+ {
+  "instance_id": "frank-fs__frank-178",
+  "reason": "easy companion set, v1.1: Hidden tests grade some solutions wrongly; the proposed repair changed the stated contract and was rejected."
+ },
+ {
+  "instance_id": "frank-fs__frank-222",
+  "reason": "easy companion set, v1.1: Hidden tests grade some solutions wrongly and no repair passed validation."
+ },
+ {
+  "instance_id": "frank-fs__frank-266",
+  "reason": "easy companion set, v1.1: Hidden tests grade some solutions wrongly and no repair passed validation."
+ },
+ {
+  "instance_id": "fslaborg__deedle-609",
+  "reason": "easy companion set, v1.1: Hidden tests grade some solutions wrongly and no repair passed validation."
+ },
+ {
+  "instance_id": "jappeace__hatter-136",
+  "reason": "easy companion set, v1.1: Hidden tests grade some solutions wrongly and no repair passed validation."
+ },
+ {
+  "instance_id": "jappeace__hatter-46",
+  "reason": "easy companion set, v1.1: Hidden tests grade some solutions wrongly and no repair passed validation."
+ },
+ {
+  "instance_id": "lmilojevicc__herdr-splits.nvim-18",
+  "reason": "easy companion set, v1.1: Hidden tests reject a reasonable solution: they require behaviour the statement does not specify."
+ },
+ {
+  "instance_id": "medizininformatik-initiative__interpolar-1254",
+  "reason": "easy companion set, v1.1: Hidden tests grade some solutions wrongly and no repair passed validation."
+ },
+ {
+  "instance_id": "nicegeo__nicegeo-257",
+  "reason": "easy companion set, v1.1: Hidden tests grade some solutions wrongly; the proposed repair changed the stated contract and was rejected."
+ },
+ {
+  "instance_id": "pharmaverse__anca-1113",
+  "reason": "easy companion set, v1.1: Hidden tests grade some solutions wrongly and no repair passed validation."
+ },
+ {
+  "instance_id": "samply__blaze-3457",
+  "reason": "easy companion set, v1.1: Test preparation downloads Loinc_2.78.zip from loinc.org, which is not reachable; no command-level fix."
+ },
+ {
+  "instance_id": "scalameta__metals-8209",
+  "reason": "easy companion set, v1.1: Hidden tests grade some solutions wrongly and no repair passed validation."
+ },
+ {
+  "instance_id": "serverpod__skills-12",
+  "reason": "easy companion set, v1.1: Reference patch passes only intermittently (flaky test)."
+ },
+ {
+  "instance_id": "serverpod__skills-21",
+  "reason": "easy companion set, v1.1: Hidden tests grade some solutions wrongly and no repair passed validation."
+ },
+ {
+  "instance_id": "sudo-tee__opencode.nvim-238",
+  "reason": "easy companion set, v1.1: Hidden tests grade some solutions wrongly and no repair passed validation."
+ },
+ {
+  "instance_id": "sudo-tee__opencode.nvim-412",
+  "reason": "easy companion set, v1.1: Hidden tests grade some solutions wrongly and no repair passed validation."
+ },
+ {
+  "instance_id": "timokramer__charm.clj-6",
+  "reason": "easy companion set, v1.1: Hidden tests grade some solutions wrongly and no repair passed validation."
+ },
+ {
+  "instance_id": "tw0po1nt__fshttp.studio-134",
+  "reason": "easy companion set, v1.1: Hidden tests reject a reasonable solution: they require behaviour the statement does not specify."
+ },
+ {
+  "instance_id": "tw0po1nt__fshttp.studio-197",
+  "reason": "easy companion set, v1.1: Hidden tests grade some solutions wrongly and no repair passed validation."
+ },
+ {
+  "instance_id": "usepa__epatada-977",
+  "reason": "easy companion set, v1.1: Hidden tests reject a reasonable solution: they require behaviour the statement does not specify."
  }
 ]

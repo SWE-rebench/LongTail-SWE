@@ -2,6 +2,87 @@
   "schema_version": "longtail-release-manifest-v1",
   "release_id": "longtail-swe-202-v1",
   "publication_status": "versioned_repository_release",
+  "task_fixes": {
+    "revision": "v1.1",
+    "changelog": "CHANGES_v1.1.md",
+    "previous_source_commit": "d5179b1c5738b85e35c06ea7b1700eb38256a326",
+    "previous_sha256": {
+      "data/longtail_tasks.json": "ee041fb71b08398256f98417f3454a138b082b246b41e6ebecc5db3d07a10ff2",
+      "data/longtail_easy_tasks.json": "a2d03b933c0a471f1c7dea867fcfed50bffe228cae392929e9f3e4d21b94302b",
+      "data/excluded_tasks.json": "89ebb9eb09dc7dc6d07f8268cc6ced0a743ede1923932a1a73f036eec356e714"
+    },
+    "hard_changed_records": {
+      "juliadiff__differentiationinterface.jl-1036": {
+        "fields": [
+          "install_config.test_cmd"
+        ],
+        "previous_record_sha256": "383579c336b062c1a31aeb69b6f154e9a92b6451fa4ee8f04b018f544778bf8f",
+        "record_sha256": "4e153bcdd4b5ad5e2241e69f91f1926b2672605ce8b6a801d2f432b825f80cf3"
+      },
+      "rrousselgit__riverpod-4747": {
+        "fields": [
+          "install_config.test_cmd"
+        ],
+        "previous_record_sha256": "0c66f6ebfd75147ce33f61176c3d55ad32ab15df8d3e33a3a31e950c7d8875b7",
+        "record_sha256": "bf73d971059c388d8c79ab9bf1232ac9b22f4babd47e55dba0371b2b98e8fdb4"
+      },
+      "samply__blaze-3728": {
+        "fields": [
+          "install_config.test_cmd"
+        ],
+        "previous_record_sha256": "6d00d3a31d271d5c9519f3bc9acb0a965495a7ffcca510040d13230f649cb334",
+        "record_sha256": "84376ce9e82df3d36ab954bca04ecd4a0dca09eb2c85f500179a4e71bfc9fe25"
+      },
+      "scottarbeit__grace-136": {
+        "fields": [
+          "test_patch",
+          "FAIL_TO_PASS",
+          "PASS_TO_PASS"
+        ],
+        "previous_record_sha256": "8697996b97c7743d9684db9e33308259a6d29c7b50dfc9294ffa2e415523379e",
+        "record_sha256": "e85046880ed44f16ca8d02b886309fe511707895ee5092840b46413dea0cf288"
+      },
+      "scottarbeit__grace-800": {
+        "fields": [
+          "FAIL_TO_PASS"
+        ],
+        "previous_record_sha256": "eca76f9738ce6c934ca27629bfe0c02273ad27044f0186298e37d15711ff68cd",
+        "record_sha256": "3cb65b6f879b317707333085a801ac60d95813f5732d01ba62cd0211434fa3d2"
+      }
+    },
+    "easy_changed_records": 99,
+    "easy_excluded_instance_ids": [
+      "absaoss__pramen-717",
+      "android__nowinandroid-2055",
+      "atomvm__atomvm-2253",
+      "babashka__cli-189",
+      "birdnet-team__birdnet-live-app-41",
+      "databrickslabs__brickster-247",
+      "evovest__evotrees.jl-327",
+      "frank-fs__frank-178",
+      "frank-fs__frank-222",
+      "frank-fs__frank-266",
+      "fslaborg__deedle-609",
+      "jappeace__hatter-136",
+      "jappeace__hatter-46",
+      "lmilojevicc__herdr-splits.nvim-18",
+      "medizininformatik-initiative__interpolar-1254",
+      "nicegeo__nicegeo-257",
+      "pharmaverse__anca-1113",
+      "samply__blaze-3457",
+      "scalameta__metals-8209",
+      "serverpod__skills-12",
+      "serverpod__skills-21",
+      "sudo-tee__opencode.nvim-238",
+      "sudo-tee__opencode.nvim-412",
+      "timokramer__charm.clj-6",
+      "tw0po1nt__fshttp.studio-134",
+      "tw0po1nt__fshttp.studio-197",
+      "usepa__epatada-977"
+    ],
+    "historical_results_regraded": false,
+    "note": "Hard: only test_patch, FAIL_TO_PASS, PASS_TO_PASS and install_config.test_cmd of 5 records change; reference patches, images and install steps are unchanged. The Riverpod P2P evidence question is resolved by riverpod-4747's test_cmd fix. Saved results and annotations are historical and not regraded."
+  },
   "source": {
     "previous_hard_task_count": 206,
     "public_source_commit": "e9e814d",
@@ -10,9 +91,9 @@
   },
   "counts": {
     "hard": 202,
-    "easy": 296,
-    "combined": 498,
-    "excluded": 35,
+    "easy": 269,
+    "combined": 471,
+    "excluded": 62,
     "models": 8,
     "attempts": 4848
   },
@@ -327,7 +408,7 @@
     "johnynek__bosatsu-1928": "aa9b4c3e06a551cc7ad488fd4d9d044f9a1cd4c98be1d0c8a2b82379f9bb0935",
     "johnynek__bosatsu-2264": "f82826bf77dc2a77a96efda4393859e9d43280a2104c3b07f10def9c99cc0824",
     "juliaactuary__financemodels.jl-282": "4c6e0d924d312ff4c01a96d1f1161a6a62e4bc6a9f1d2656b5713cd1625e883d",
-    "juliadiff__differentiationinterface.jl-1036": "383579c336b062c1a31aeb69b6f154e9a92b6451fa4ee8f04b018f544778bf8f",
+    "juliadiff__differentiationinterface.jl-1036": "4e153bcdd4b5ad5e2241e69f91f1926b2672605ce8b6a801d2f432b825f80cf3",
     "juliaeditorsupport__juliaformatter.jl-1110": "5f7aa3330f50ebce385563d979bb30b68a80bdfdd0fb8f92f77a4f651812f72b",
     "juliagpu__cutile.jl-123": "8d7e80dfd9051dd2bfcdf83549ece2fe1d08ec8a20c83465b5a1b6b8ed16fc16",
     "juliagpu__cutile.jl-32": "0831ca25f5a033b2e55c3427d0ef605c80b081f2fce0a790e40a1e9b214205fb",
@@ -378,24 +459,24 @@
     "rabbitmq__khepri-357": "b7b86e95fd73022350a81c9905e77e7be06f32069b71ed90782ccdfbedacb430",
     "razzmatazz__csharp-language-server-346": "e9e2725074a0982a22658af98121890674e00097a126686d1be84bd52b269845",
     "replikativ__spindel-29": "c54b3e2076a834fafbbcbea76e4db7fd8c435a96e5aa8764caa93c662f8e2423",
-    "rrousselgit__riverpod-4747": "0c66f6ebfd75147ce33f61176c3d55ad32ab15df8d3e33a3a31e950c7d8875b7",
+    "rrousselgit__riverpod-4747": "bf73d971059c388d8c79ab9bf1232ac9b22f4babd47e55dba0371b2b98e8fdb4",
     "rstudio__renv-2200": "e0ba07f8c2c78c6950db62d6ad2c97f61c78bf0bc7904bb7d9e73ea882c70360",
     "rstudio__renv-2225": "0b90925b68708c766b1a92f9af06ab3b7db1025b0bf534f00460b36eeaa0aa86",
     "rstudio__renv-2289": "9ab263d26181eb3e79db90d5abae23fc3dc24aabb58e6aff5dcd990c66274884",
     "samply__blaze-3329": "e123e1a955a7efb02a1b9171aa1e84c0149ba6efdfad3f13248156d5321dd94c",
     "samply__blaze-3368": "17df27880e3bf325d194a0c1e0895050b366dc98403c5db8db60e65aceaa27d6",
-    "samply__blaze-3728": "6d00d3a31d271d5c9519f3bc9acb0a965495a7ffcca510040d13230f649cb334",
+    "samply__blaze-3728": "84376ce9e82df3d36ab954bca04ecd4a0dca09eb2c85f500179a4e71bfc9fe25",
     "samply__blaze-3960": "91e6f285e5ca20d2afbe2b0bfd6e5d09b38d73ca85ea210cb70c2ee0b0a40447",
     "scala__scala3-25640": "7426f0d00459a5e63ca59475fa3472e7dd8ba62158e5065eeb237a81fa126369",
     "scalalandio__chimney-875": "594f9d28e4f1918f0dbf942ea9a8cf95d0b5973382107fb33d8433a8d592aaa0",
     "scalalandio__chimney-876": "c98a74cd4a630006cc1c90d781cccaee162be825ff8d675ac1f4844dac39b94e",
     "scalameta__metals-8357": "f95acc355013928f43b0bd87894f22bffeebbbd18c5b437a6b7d42e4f16bc097",
     "scottarbeit__grace-124": "a9321d3fb6f004245a7c76088753f9a8f4d73a7f695536bc0bf8c50e8cab884b",
-    "scottarbeit__grace-136": "8697996b97c7743d9684db9e33308259a6d29c7b50dfc9294ffa2e415523379e",
+    "scottarbeit__grace-136": "e85046880ed44f16ca8d02b886309fe511707895ee5092840b46413dea0cf288",
     "scottarbeit__grace-173": "a05e2a2c8afb422ca1961b092e6b9aa419ed003b4f93199fc70cdec07b1040e8",
     "scottarbeit__grace-400": "267153b6ca3241cddd71480286fd81b7e577f76f9aa162c11ee6680172374803",
     "scottarbeit__grace-793": "c0762e5f1f27d84144fd71c42f97ab1fc806d8080c87223e326e0bbeee6bfb2e",
-    "scottarbeit__grace-800": "eca76f9738ce6c934ca27629bfe0c02273ad27044f0186298e37d15711ff68cd",
+    "scottarbeit__grace-800": "3cb65b6f879b317707333085a801ac60d95813f5732d01ba62cd0211434fa3d2",
     "scrive__kitab-20": "c6f69d67da9601bc2173bdd01c4ecc987796f8a022532f8c98ee1c423509f77e",
     "scylladb__scylla-migrator-375": "e6db22645c933b051bd8216bab7c866f0259e89582b119eea685e2ec5e220117",
     "serverpod__skills-30": "c4d61fe63b6c267815d470912f8c7808c9a26d35dee16b2a9bfcb0b5d36f3f65",
@@ -493,9 +574,9 @@
     "note": "Historical statuses are not a fresh semantic certification. Pending questions include Riverpod P2P evidence. Missing per-attempt execution fields are unknown, not successful execution."
   },
   "sha256": {
-    "data/longtail_tasks.json": "ee041fb71b08398256f98417f3454a138b082b246b41e6ebecc5db3d07a10ff2",
-    "data/longtail_easy_tasks.json": "a2d03b933c0a471f1c7dea867fcfed50bffe228cae392929e9f3e4d21b94302b",
-    "data/excluded_tasks.json": "89ebb9eb09dc7dc6d07f8268cc6ced0a743ede1923932a1a73f036eec356e714",
+    "data/longtail_tasks.json": "1dbf3495e02ef2565012917aa436bb53a3fb47f31e426200dc942c6b425b68a1",
+    "data/longtail_easy_tasks.json": "0bc6d1ec5a440544fd45527d687a687439ff07aedb003a1403bb58bfbe0bdbfc",
+    "data/excluded_tasks.json": "040bb28989cba770396e5454fbb3eab5be82d3b915dc29a0b3689980513c08cf",
     "data/selected_results_202.jsonl": "9d3a2ff83db94dad128d9ae0b3c4516ac2d64b91cae676d4165637b388d6f9ed",
     "data/results_202.json": "08e232f79734d593d31a30d63f521de39525a2aa12109c990e2233ec794fc51d",
     "data/results_202.csv": "89fb53aafca81ca9f747e8f2102e982d7fbf6af3d9ae7d0b0f7f4dba20d262f0",

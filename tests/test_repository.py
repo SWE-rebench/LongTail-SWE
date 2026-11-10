@@ -30,8 +30,8 @@ IMAGES = yaml.safe_load((ROOT / "base_images.yaml").read_text(encoding="utf-8"))
 
 def test_tasks_are_well_formed():
     ids = [t["instance_id"] for t in ALL_TASKS]
-    assert len(TASKS) == 202 and len(EASY_TASKS) == 296
-    assert len(ids) == len(set(ids)) == 498
+    assert len(TASKS) == 202 and len(EASY_TASKS) == 269
+    assert len(ids) == len(set(ids)) == 471
     for t in ALL_TASKS:
         assert t["patch"] and t["test_patch"] and t["FAIL_TO_PASS"]
         assert not set(t["FAIL_TO_PASS"]) & set(t["PASS_TO_PASS"])
@@ -125,8 +125,8 @@ def test_statement_split_and_licenses():
 
 def test_excluded_tasks_are_not_in_the_benchmark():
     excluded = json.loads((ROOT / "data" / "excluded_tasks.json").read_text(encoding="utf-8"))
-    assert len(excluded) == 35
-    assert len({e["instance_id"] for e in excluded}) == 35
+    assert len(excluded) == 62
+    assert len({e["instance_id"] for e in excluded}) == 62
     assert not {e["instance_id"] for e in excluded} & {t["instance_id"] for t in ALL_TASKS}
 
 
@@ -142,7 +142,7 @@ def test_release_manifest_and_retained_content():
     manifest = json.loads((ROOT / "data/release_manifest.json").read_text())
     assert manifest["release_id"] == "longtail-swe-202-v1"
     assert manifest["instance_ids"] == [t["instance_id"] for t in TASKS]
-    assert manifest["counts"] == {"hard": 202, "easy": 296, "combined": 498, "excluded": 35, "models": 8, "attempts": 4848}
+    assert manifest["counts"] == {"hard": 202, "easy": 269, "combined": 471, "excluded": 62, "models": 8, "attempts": 4848}
     for relative, expected in manifest["sha256"].items():
         assert hashlib.sha256((ROOT / relative).read_bytes()).hexdigest() == expected, relative
     public_fields = {"instance_id", "repo", "base_commit", "created_at", "language", "license",
