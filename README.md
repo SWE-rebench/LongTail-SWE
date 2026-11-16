@@ -12,6 +12,9 @@ solved only if every FAIL_TO_PASS and PASS_TO_PASS test from the merged pull req
 | hard (the benchmark) | 202 | 13 | `longtail-swe/longtail-swe` | `data/longtail_tasks.json` |
 | easy (companion set) | 269 | 13 | `longtail-swe/longtail-swe-easy` | `data/longtail_easy_tasks.json` |
 
+**v1.2:** more robust test commands for 6 hard tasks (no network steps, no ungraded test runs, and a higher open-file
+limit for `cocoanetics__swiftmcp-129`). Statements, patches, hidden tests and test lists are unchanged.
+
 ## Quick start (Harbor)
 
 ```bash
